@@ -65,6 +65,8 @@ export const mixinFileAssociated = <T extends CustomElementConstructor>(Element:
 
 			const { messages } = this.constructor as unknown as mixinFileAssociated.Constructor
 
+			this.internals.setValidity({})
+
 			for (const file of possibleFiles) {
 				if (this.excludeAcceptAllOption && !this.#validateType(file)) {
 					this.internals.setValidity(

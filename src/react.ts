@@ -1,0 +1,5 @@
+export { ClickComponent } from "./react/click.ts"
+export { DropComponent } from "./react/drop.ts"
+export { FileAssociatedComponent } from "./react/file-associated.ts"
+export { FormAssociatedComponent } from "./react/form-associated.ts"
+export { InternalsComponent } from "./react/internals.ts"

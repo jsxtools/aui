@@ -1,0 +1,5 @@
+.DS_Store
+*.lockb
+*.log
+dist
+node_modules

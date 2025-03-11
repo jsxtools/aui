@@ -65,7 +65,7 @@ export const mixinFormAssociated = <T extends CustomElementConstructor>(Element:
 			return this.internals.willValidate
 		}
 
-		setCustomValidity(message: string) {
+		setCustomValidity(message: string): void {
 			const customError = Boolean(message)
 
 			this.internals.setValidity({ customError }, message)

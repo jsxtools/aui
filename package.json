@@ -2,7 +2,7 @@
 	"$schema": "https://json.schemastore.org/package.json",
 	"name": "@jsxtools/aui",
 	"description": "A baseline UI as Mixins, Custom Elements, React Components, etc.",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"type": "module",
 	"license": "MIT-0",
 	"exports": {
@@ -58,7 +58,8 @@
 	},
 	"scripts": {
 		"build": "bun scripts/build.ts",
-		"check": "tsc --noEmit --project tsconfig.json"
+		"check": "tsc --noEmit --project tsconfig.json",
+		"prepublishOnly": "bun scripts/build.ts"
 	},
 	"packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

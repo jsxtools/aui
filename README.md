@@ -2,6 +2,7 @@
 
 [![NPM Version][npm-img]][npm-url]
 [![Build Status][cli-img]][cli-url]
+[![Coverage][cov-img]][cov-url]
 
 **AUI** is a baseline UI available as Mixins, Custom Elements, and React Components, enabling you to build accessible and reusable components in whatever development environment you prefer.
 
@@ -41,3 +42,5 @@ This project is licensed under the [MIT No Attribution License](https://opensour
 [npm-url]: https://www.npmjs.com/package/@jsxtools/aui
 [cli-img]: https://github.com/jsxtools/aui/actions/workflows/check.yml/badge.svg
 [cli-url]: https://github.com/jsxtools/aui/actions/workflows/check.yml
+[cov-img]: https://codecov.io/gh/jsxtools/aui/graph/badge.svg
+[cov-url]: https://codecov.io/gh/jsxtools/aui

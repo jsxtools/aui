@@ -7,10 +7,10 @@ import { without } from "./_without.ts"
 
 customElements.define("a-form-associated-file", FormAssociatedFileElement)
 
-export const FormAssociatedFileComponent = (props: FormAssociatedFileComponent.Props) =>
+export const FormAssociatedFileComponent = ({ ref, ...props }: FormAssociatedFileComponent.Props) =>
 	createElement("a-form-associated-file", {
 		...without(props, "excludeAcceptAllOption", "maxSize", "types", "value"),
-		// biome-ignore lint/correctness/useExhaustiveDependencies: props is treated immutably
+		// biome-ignore lint/correctness/useExhaustiveDependencies: they are immutable
 		ref: useCallback(
 			(current: FormAssociatedFileElement | null) => {
 				if (current) {
@@ -25,19 +25,15 @@ export const FormAssociatedFileComponent = (props: FormAssociatedFileComponent.P
 					if ("types" in props) {
 						current.types = props.types
 					}
-
-					if ("value" in props) {
-						current.value = props.value
-					}
 				}
 
-				if (typeof props.ref === "function") {
-					props.ref(current)
-				} else if (props.ref && "current" in props.ref) {
-					props.ref.current = current
+				if (typeof ref === "function") {
+					ref(current)
+				} else if (ref && "current" in ref) {
+					ref.current = current
 				}
 			},
-			[props.excludeAcceptAllOption, props.maxSize, props.types, props.value, props.ref],
+			[props.excludeAcceptAllOption, props.maxSize, props.types, ref],
 		),
 	})
 
@@ -67,7 +63,6 @@ declare module "react" {
 					maxSize?: number
 					multiple?: boolean
 					types?: FilePickerAcceptType[]
-					value?: string
 				},
 				FormAssociatedFileElement
 			>

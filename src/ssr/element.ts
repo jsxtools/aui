@@ -1,4 +1,4 @@
-export const HTMLElement: CustomElementConstructor = globalThis.HTMLElement || class HTMLElement {}
+export const HTMLElement: CustomElementConstructor = globalThis.HTMLElement || class {}
 
 export interface CustomElement extends HTMLElement {
 	attributeChangedCallback?(name: string, oldValue: string | null, newValue: string | null): void

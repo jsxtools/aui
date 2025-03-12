@@ -1,5 +1,7 @@
 .DS_Store
 *.lockb
 *.log
+coverage
 dist
 node_modules
+__screenshots__

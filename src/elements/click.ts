@@ -5,5 +5,6 @@ import { HTMLElement } from "../ssr/element.ts"
 export class ClickElement extends ClickMixin(HTMLElement) {}
 
 export namespace ClickElement {
+	export type Constructor = ClickMixin.Constructor
 	export type Mixin = ClickMixin.Mixin
 }

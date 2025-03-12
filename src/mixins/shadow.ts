@@ -1,7 +1,8 @@
 import type { CustomElementConstructor } from "../ssr/element.ts"
 import type { ShadowRootInit } from "../ssr/shadow.ts"
 
-export const mixinShadow = <T extends CustomElementConstructor>(Element: T, config: ShadowRootInit) =>
+/** A mixin to provide a Shadow DOM with configurable options to a custom element. */
+export const ShadowMixin = <T extends CustomElementConstructor>(Element: T, config: ShadowRootInit) =>
 	class extends Element {
 		shadowRoot = Object.assign(super.attachShadow(config), {
 			innerHTML: config?.innerHTML ?? null,
@@ -11,9 +12,9 @@ export const mixinShadow = <T extends CustomElementConstructor>(Element: T, conf
 		attachShadow(): ShadowRoot {
 			return this.shadowRoot
 		}
-	} as unknown as T & mixinShadow.Constructor
+	} as T & ShadowMixin.Constructor
 
-export namespace mixinShadow {
+export namespace ShadowMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}
 
 	export interface Mixin extends HTMLElement {

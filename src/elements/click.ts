@@ -1,8 +1,9 @@
-import { mixinClick } from "../mixins/click.ts"
+import { ClickMixin } from "../mixins/click.ts"
 import { HTMLElement } from "../ssr/element.ts"
 
-export class ClickElement extends mixinClick(HTMLElement) {}
+/** A Custom Element that provides keyboard-accessible click support. */
+export class ClickElement extends ClickMixin(HTMLElement) {}
 
 export namespace ClickElement {
-	export type Mixin = mixinClick.Mixin
+	export type Mixin = ClickMixin.Mixin
 }

@@ -6,7 +6,7 @@ import { without } from "./_without.ts"
 customElements.define("a-form-associated", FormAssociatedElement)
 
 export const FormAssociatedComponent = (props: FormAssociatedComponent.Props) =>
-	createElement("a-file-associated", {
+	createElement("a-form-associated-file", {
 		...without(props, "value"),
 		// biome-ignore lint/correctness/useExhaustiveDependencies: props is treated immutably
 		ref: useCallback(
@@ -48,7 +48,7 @@ declare module "react" {
 					disabled?: boolean
 					name?: string
 					required?: boolean
-					value?: string | File | FormData
+					value?: string
 				},
 				FormAssociatedElement
 			>

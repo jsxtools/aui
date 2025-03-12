@@ -1,8 +1,8 @@
-import { mixinFormAssociated } from "../mixins/form-associated.ts"
+import { FormAssociatedMixin } from "../mixins/form-associated.ts"
 import { HTMLElement } from "../ssr/element.ts"
 
-export class FormAssociatedElement extends mixinFormAssociated(HTMLElement) {}
+export class FormAssociatedElement extends FormAssociatedMixin(HTMLElement) {}
 
 export namespace FormAssociatedElement {
-	export type Mixin = mixinFormAssociated.Mixin
+	export type Mixin = FormAssociatedMixin.Mixin
 }

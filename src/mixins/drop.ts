@@ -1,9 +1,10 @@
 import type { CustomElementConstructor } from "../ssr/element.ts"
 
-import { mixinInternals } from "./internals.ts"
+import { InternalsMixin } from "./internals.ts"
 
-export const mixinDrop = <T extends CustomElementConstructor>(Element: T) =>
-	class extends mixinInternals(Element) {
+/** A mixin to provide drag-and-drop support to a custom element. */
+export const DropMixin = <T extends CustomElementConstructor>(Element: T) =>
+	class extends InternalsMixin(Element) {
 		#handleDragOver(event: DragEvent): void {
 			event.preventDefault()
 		}
@@ -33,10 +34,10 @@ export const mixinDrop = <T extends CustomElementConstructor>(Element: T) =>
 
 			super.disconnectedCallback?.()
 		}
-	} as unknown as T & mixinDrop.Constructor
+	} as T & DropMixin.Constructor
 
-export namespace mixinDrop {
+export namespace DropMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}
 
-	export interface Mixin extends mixinInternals.Mixin {}
+	export interface Mixin extends InternalsMixin.Mixin {}
 }

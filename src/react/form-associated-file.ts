@@ -1,18 +1,18 @@
 import type { FilePickerAcceptType } from "../ssr.ts"
 
 import { createElement, useCallback } from "react"
-import { FileAssociatedElement } from "../elements/file-associated.ts"
+import { FormAssociatedFileElement } from "../elements/form-associated-file.ts"
 import { customElements } from "../ssr/custom-elements.ts"
 import { without } from "./_without.ts"
 
-customElements.define("a-file-associated", FileAssociatedElement)
+customElements.define("a-form-associated-file", FormAssociatedFileElement)
 
-export const FileAssociatedComponent = (props: FileAssociatedComponent.Props) =>
-	createElement("a-file-associated", {
+export const FormAssociatedFileComponent = (props: FormAssociatedFileComponent.Props) =>
+	createElement("a-form-associated-file", {
 		...without(props, "excludeAcceptAllOption", "maxSize", "types", "value"),
 		// biome-ignore lint/correctness/useExhaustiveDependencies: props is treated immutably
 		ref: useCallback(
-			(current: FileAssociatedElement | null) => {
+			(current: FormAssociatedFileElement | null) => {
 				if (current) {
 					if ("excludeAcceptAllOption" in props) {
 						current.excludeAcceptAllOption = props.excludeAcceptAllOption
@@ -41,23 +41,23 @@ export const FileAssociatedComponent = (props: FileAssociatedComponent.Props) =>
 		),
 	})
 
-export namespace FileAssociatedComponent {
-	export type Element = FileAssociatedElement
+export namespace FormAssociatedFileComponent {
+	export type Element = FormAssociatedFileElement
 
-	export interface Props extends React.ComponentProps<"a-file-associated"> {}
+	export interface Props extends React.ComponentProps<"a-form-associated-file"> {}
 }
 
 declare global {
 	interface HTMLElementTagNameMap {
-		"a-file-associated": FileAssociatedElement
+		"a-form-associated-file": FormAssociatedFileElement
 	}
 }
 
 declare module "react" {
 	namespace JSX {
 		interface IntrinsicElements {
-			"a-file-associated": React.DetailedHTMLProps<
-				React.HTMLAttributes<FileAssociatedElement> & {
+			"a-form-associated-file": React.DetailedHTMLProps<
+				React.HTMLAttributes<FormAssociatedFileElement> & {
 					defaultValue?: string
 					disabled?: boolean
 					name?: string
@@ -67,9 +67,9 @@ declare module "react" {
 					maxSize?: number
 					multiple?: boolean
 					types?: FilePickerAcceptType[]
-					value?: string | File | FormData
+					value?: string
 				},
-				FileAssociatedElement
+				FormAssociatedFileElement
 			>
 		}
 	}

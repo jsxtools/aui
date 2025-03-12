@@ -1,21 +1,13 @@
 import type { CustomElementConstructor } from "../ssr/element.ts"
 import type { FilePickerAcceptType } from "../ssr/show-open-file-picker.ts"
 
-import { mixinDrop } from "./drop.ts"
-import { mixinFormAssociated } from "./form-associated.ts"
+import { DropMixin } from "./drop.ts"
+import { FormAssociatedMixin } from "./form-associated.ts"
 
-export const mixinFileAssociated = <T extends CustomElementConstructor>(Element: T) =>
-	class extends mixinFormAssociated(mixinDrop(Element)) {
+/** A mixin to provide form association and validation to a custom element. */
+export const FormAssociatedFileMixin = <T extends CustomElementConstructor>(Element: T) =>
+	class extends FormAssociatedMixin(DropMixin(Element)) {
 		static observedAttributes = ["multiple", ...super.observedAttributes!]
-
-		static messages = {
-			typeMismatch(): string {
-				return `Please upload an accepted file type if you want to proceed.`
-			},
-			rangeOverflow(): string {
-				return `Please upload an smaller file size if you want to proceed.`
-			},
-		}
 
 		excludeAcceptAllOption = true
 		invalid = false
@@ -63,8 +55,6 @@ export const mixinFileAssociated = <T extends CustomElementConstructor>(Element:
 			const formData: FormData = new FormData()
 			const files: File[] = []
 
-			const { messages } = this.constructor as unknown as mixinFileAssociated.Constructor
-
 			this.internals.setValidity({})
 
 			for (const file of possibleFiles) {
@@ -73,7 +63,7 @@ export const mixinFileAssociated = <T extends CustomElementConstructor>(Element:
 						{
 							typeMismatch: true,
 						},
-						messages.typeMismatch(file),
+						"Please upload an accepted file type if you want to proceed.",
 					)
 
 					this.#setFormValue([], null)
@@ -86,7 +76,7 @@ export const mixinFileAssociated = <T extends CustomElementConstructor>(Element:
 						{
 							rangeOverflow: true,
 						},
-						messages.rangeOverflow(file),
+						"Please upload an smaller file size if you want to proceed.",
 					)
 
 					this.#setFormValue([], null)
@@ -99,17 +89,16 @@ export const mixinFileAssociated = <T extends CustomElementConstructor>(Element:
 				formData.append(this.name, file)
 			}
 
-			if (this.dispatchEvent(new Event("input"))) {
-				this.#setFormValue(files, formData)
-
-				this.dispatchEvent(new Event("change", { bubbles: true }))
-			}
+			this.#setFormValue(files, formData)
 		}
 
 		#setFormValue(files: File[], formData: FormData | null) {
 			this.#files = files
 
 			this.internals.setFormValue(formData)
+
+			this.dispatchEvent(new Event("input", { bubbles: true }))
+			this.dispatchEvent(new Event("change", { bubbles: true }))
 		}
 
 		#handleDrop(event: DragEvent) {
@@ -137,17 +126,19 @@ export const mixinFileAssociated = <T extends CustomElementConstructor>(Element:
 				excludeAcceptAllOption: this.excludeAcceptAllOption,
 				multiple: this.multiple,
 				types: this.types,
-			}).then((fileHandles) => {
-				const filePromises: Promise<File>[] = []
+			})
+				.then((fileHandles) => {
+					const handledFiles: Promise<File>[] = []
 
-				for (const fileHandle of fileHandles) {
-					filePromises.push(fileHandle.getFile())
-				}
+					for (const fileHandle of fileHandles) {
+						handledFiles.push(fileHandle.getFile())
+					}
 
-				Promise.all(filePromises).then((files) => {
+					return Promise.all(handledFiles)
+				})
+				.then((files) => {
 					this.#handleInput(files)
 				})
-			})
 		}
 
 		connectedCallback(): void {
@@ -171,17 +162,12 @@ export const mixinFileAssociated = <T extends CustomElementConstructor>(Element:
 
 			super.attributeChangedCallback?.(name, oldValue, newValue)
 		}
-	} as unknown as T & mixinFileAssociated.Constructor
+	} as T & FormAssociatedFileMixin.Constructor
 
-export namespace mixinFileAssociated {
-	export interface Constructor extends CustomElementConstructor<Mixin> {
-		messages: {
-			typeMismatch(file: File): string
-			rangeOverflow(file: File): string
-		}
-	}
+export namespace FormAssociatedFileMixin {
+	export interface Constructor extends CustomElementConstructor<Mixin> {}
 
-	export interface Mixin extends mixinFormAssociated.Mixin, mixinDrop.Mixin {
+	export interface Mixin extends FormAssociatedMixin.Mixin, DropMixin.Mixin {
 		excludeAcceptAllOption: boolean
 		files: File[]
 		invalid: boolean

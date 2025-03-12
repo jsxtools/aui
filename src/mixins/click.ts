@@ -1,6 +1,7 @@
 import type { CustomElementConstructor } from "../ssr/element.ts"
 
-export const mixinClick = <T extends CustomElementConstructor>(Element: T) =>
+/** A mixin to provide keyboard-accessible click support to a custom element. */
+export const ClickMixin = <T extends CustomElementConstructor>(Element: T) =>
 	class extends Element {
 		#handleKeydown(event: KeyboardEvent): void {
 			if (event.key === "Enter" || event.key === " ") {
@@ -33,9 +34,9 @@ export const mixinClick = <T extends CustomElementConstructor>(Element: T) =>
 
 			super.disconnectedCallback?.()
 		}
-	} as unknown as T & mixinClick.Constructor
+	} as T & ClickMixin.Constructor
 
-export namespace mixinClick {
+export namespace ClickMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}
 
 	export interface Mixin {}

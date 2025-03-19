@@ -1,29 +1,21 @@
 import { createElement, useCallback } from "react"
+import { customElements } from "../api/dom.ts"
 import { FormAssociatedElement } from "../elements/form-associated.ts"
-import { customElements } from "../ssr/custom-elements.ts"
-import { without } from "./_without.ts"
 
 customElements.define("a-form-associated", FormAssociatedElement)
 
-export const FormAssociatedComponent = (props: FormAssociatedComponent.Props) =>
-	createElement("a-form-associated-file", {
-		...without(props, "value"),
-		// biome-ignore lint/correctness/useExhaustiveDependencies: props is treated immutably
+export const FormAssociatedComponent = ({ ref, ...props }: FormAssociatedComponent.Props) =>
+	createElement("a-form-associated", {
+		...props,
 		ref: useCallback(
 			(current: FormAssociatedElement | null) => {
-				if (current) {
-					if ("value" in props) {
-						current.value = props.value
-					}
-				}
-
-				if (typeof props.ref === "function") {
-					props.ref(current)
-				} else if (props.ref && "current" in props.ref) {
-					props.ref.current = current
+				if (typeof ref === "function") {
+					ref(current)
+				} else if (ref && "current" in ref) {
+					ref.current = current
 				}
 			},
-			[props.value, props.ref],
+			[ref],
 		),
 	})
 
@@ -48,7 +40,6 @@ declare module "react" {
 					disabled?: boolean
 					name?: string
 					required?: boolean
-					value?: string
 				},
 				FormAssociatedElement
 			>

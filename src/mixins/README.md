@@ -5,7 +5,7 @@ A collection of reusable mixins to enhance custom elements with additional funct
 - **[Click](#click)**: A mixin that provides keyboard-accessible click support to a custom element.
 - **[Drop](#drop)**: A mixin that provides drag-and-drop support with visual state feedback to a custom element.
 - **[Internals](#internals)**: A mixin that provides the ElementInternals API to a custom element.
-- **[Shadow](#shadow)**: A mixin that provides shadow DOM encapsulation with configurable options to a custom element.
+- **[Shadow](#shadow)**: A mixin that provides a configurable ShadowRoot to a custom element.
 - **[FormAssociated](#form-associated)**: A mixin that provides form association and validation support to a custom element.
 - **[FormAssociatedFile](#form-associated-file)**: A mixin that provides file upload support with form association and validation to a custom element.
 
@@ -47,17 +47,17 @@ class MyElementWithInternals extends InternalsMixin(HTMLElement) {
 
 ## Shadow
 
-The **Shadow** mixin provides a shadow DOM with configurable options to a custom element.
+The **Shadow** mixin provides a configurable ShadowRoot to a custom element.
 
 ```ts
 import { ShadowMixin } from "@jsxtools/aui/mixins/shadow"
 
 const shadowStyles = new CSSStyleSheet()
 
-class MyElementWithShadow extends ShadowMixin(HTMLElement, {
-  innerHTML: "<slot></slot",
-  adoptedStyleSheets: [shadowStyles],
-}) {
+class MyElementWithShadow extends ShadowMixin(HTMLElement) {
+  static shadowRootAdoptedStyleSheets = [shadowStyles]
+  static shadowRootInnerHTML = "<p>shadow stuff here</p><slot></slot>"
+
   // your own functionality goes here
 }
 ```

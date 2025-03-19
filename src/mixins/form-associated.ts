@@ -1,4 +1,4 @@
-import type { CustomElementConstructor } from "../ssr/element.ts"
+import type { CustomElementConstructor } from "../api/dom.ts"
 
 import { ClickMixin } from "./click.ts"
 import { InternalsMixin } from "./internals.ts"
@@ -7,11 +7,10 @@ import { InternalsMixin } from "./internals.ts"
 export const FormAssociatedMixin = <T extends CustomElementConstructor>(Element: T) =>
 	class extends ClickMixin(InternalsMixin(Element)) {
 		static formAssociated = true
-		static observedAttributes = ["disabled", "required", "value", ...(super.observedAttributes || [])]
+		static observedAttributes = ["disabled", "required", ...(super.observedAttributes || [])]
 
 		#disabled: boolean | undefined
 		#required: boolean | undefined
-		#value: string | undefined
 
 		get disabled(): boolean {
 			return this.#disabled ?? this.hasAttribute("disabled")
@@ -29,20 +28,20 @@ export const FormAssociatedMixin = <T extends CustomElementConstructor>(Element:
 			this.internals.ariaRequired = String((this.#required = Boolean(flag)))
 		}
 
-		set name(value) {
-			this.setAttribute("name", value)
+		set name(name) {
+			this.setAttribute("name", name)
 		}
 
 		get name(): string {
 			return this.getAttribute("name") ?? ""
 		}
 
-		get value(): string {
-			return this.#value ?? this.getAttribute("value") ?? ""
+		get defaultValue(): string {
+			return this.getAttribute("value") ?? ""
 		}
 
-		set value(value) {
-			this.#value = value
+		set defaultValue(value) {
+			this.setAttribute("value", value)
 		}
 
 		get form(): HTMLFormElement | null {
@@ -80,8 +79,6 @@ export const FormAssociatedMixin = <T extends CustomElementConstructor>(Element:
 				this.disabled = newValue !== null
 			} else if (name === "required") {
 				this.required = newValue !== null
-			} else if (name === "value") {
-				this.value = newValue ?? ""
 			}
 
 			super.attributeChangedCallback?.(name, oldValue, newValue)
@@ -92,13 +89,13 @@ export namespace FormAssociatedMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}
 
 	export interface Mixin extends InternalsMixin.Mixin {
+		defaultValue: string
 		disabled: boolean
 		form: HTMLFormElement | null
 		name: string
 		required: boolean
 		validationMessage: string
 		validity: ValidityState
-		value: string
 		willValidate: boolean
 
 		checkValidity(): boolean

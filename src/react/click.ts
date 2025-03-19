@@ -1,6 +1,6 @@
 import { createElement } from "react"
+import { customElements } from "../api/dom.ts"
 import { ClickElement } from "../elements/click.ts"
-import { customElements } from "../ssr/custom-elements.ts"
 
 customElements.define("a-click", ClickElement)
 

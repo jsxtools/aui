@@ -1,6 +1,6 @@
 import { createElement } from "react"
+import { customElements } from "../api/dom.ts"
 import { InternalsElement } from "../elements/internals.ts"
-import { customElements } from "../ssr/custom-elements.ts"
 
 customElements.define("a-internals", InternalsElement)
 

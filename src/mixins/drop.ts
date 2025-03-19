@@ -1,4 +1,4 @@
-import type { CustomElementConstructor } from "../ssr/element.ts"
+import type { CustomElementConstructor } from "../api/dom.ts"
 
 import { InternalsMixin } from "./internals.ts"
 

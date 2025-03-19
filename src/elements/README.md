@@ -5,6 +5,7 @@ A collection of custom elements that provide special functionality:
 - **[Click](#click)**: A custom element that provides keyboard-accessible click support.
 - **[Drop](#drop)**: A custom element that provides drag-and-drop support with visual state feedback.
 - **[Internals](#internals)**: A custom element that provides the ElementInternals API.
+- **[Shadow](#shadow)**: A custom elements that provides a configurable ShadowRoot.
 - **[Form-Associated](#form-associated)**: A custom element that provides form association and validation support.
 - **[Form-Associated File](#form-associated-file)**: A custom element that provides file upload support with form association and validation.
 
@@ -48,6 +49,25 @@ class MyInternalsElement extends InternalsElement {
 }
 
 customElements.define("a-internals", MyInternalsElement)
+```
+
+## Shadow
+
+The **Shadow** mixin provides a configurable ShadowRoot to a custom element.
+
+```ts
+import { ShadowElement } from "@jsxtools/aui/elements/shadow"
+
+const shadowStyles = new CSSStyleSheet()
+
+class MyElementWithShadow extends ShadowElement {
+  static shadowRootAdoptedStyleSheets = [shadowStyles]
+  static shadowRootInnerHTML = "<p>shadow stuff here</p><slot></slot>"
+
+  // your own functionality goes here
+}
+
+customElements.define("a-shadow", MyElementWithShadow)
 ```
 
 ## Form-Associated

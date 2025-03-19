@@ -11,7 +11,8 @@
 			"suspicious": {
 				"noAssignInExpressions": "off",
 				"noEmptyInterface": "off",
-				"noExplicitAny": "off"
+				"noExplicitAny": "off",
+				"noRedeclare": "off"
 			},
 			"style": {
 				"noNonNullAssertion": "off",

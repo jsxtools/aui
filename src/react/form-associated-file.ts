@@ -1,23 +1,19 @@
-import type { FilePickerAcceptType } from "../ssr.ts"
+import type { FilePickerAcceptType } from "../api.ts"
 
 import { createElement, useCallback } from "react"
+import { customElements } from "../api/dom.ts"
 import { FormAssociatedFileElement } from "../elements/form-associated-file.ts"
-import { customElements } from "../ssr/custom-elements.ts"
 import { without } from "./_without.ts"
 
 customElements.define("a-form-associated-file", FormAssociatedFileElement)
 
-export const FormAssociatedFileComponent = (props: FormAssociatedFileComponent.Props) =>
+export const FormAssociatedFileComponent = ({ ref, ...props }: FormAssociatedFileComponent.Props) =>
 	createElement("a-form-associated-file", {
 		...without(props, "excludeAcceptAllOption", "maxSize", "types", "value"),
-		// biome-ignore lint/correctness/useExhaustiveDependencies: props is treated immutably
+		// biome-ignore lint/correctness/useExhaustiveDependencies: they are immutable
 		ref: useCallback(
 			(current: FormAssociatedFileElement | null) => {
 				if (current) {
-					if ("excludeAcceptAllOption" in props) {
-						current.excludeAcceptAllOption = props.excludeAcceptAllOption
-					}
-
 					if ("maxSize" in props) {
 						current.maxSize = props.maxSize
 					}
@@ -25,19 +21,15 @@ export const FormAssociatedFileComponent = (props: FormAssociatedFileComponent.P
 					if ("types" in props) {
 						current.types = props.types
 					}
-
-					if ("value" in props) {
-						current.value = props.value
-					}
 				}
 
-				if (typeof props.ref === "function") {
-					props.ref(current)
-				} else if (props.ref && "current" in props.ref) {
-					props.ref.current = current
+				if (typeof ref === "function") {
+					ref(current)
+				} else if (ref && "current" in ref) {
+					ref.current = current
 				}
 			},
-			[props.excludeAcceptAllOption, props.maxSize, props.types, props.value, props.ref],
+			[props.excludeAcceptAllOption, props.maxSize, props.types, ref],
 		),
 	})
 
@@ -67,7 +59,6 @@ declare module "react" {
 					maxSize?: number
 					multiple?: boolean
 					types?: FilePickerAcceptType[]
-					value?: string
 				},
 				FormAssociatedFileElement
 			>

@@ -1,4 +1,4 @@
-import type { CustomElementConstructor } from "../ssr/element.ts"
+import type { CustomElementConstructor } from "../api/dom.ts"
 
 /** Mixin to provide the ElementInternals API to a custom element. */
 export const InternalsMixin = <T extends CustomElementConstructor>(Element: T) =>

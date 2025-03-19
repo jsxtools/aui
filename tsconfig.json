@@ -8,6 +8,9 @@
 			"DOM.Iterable",
 			"DOM.AsyncIterable"
 		],
+		"types": [
+			"@vitest/browser/matchers"
+		],
 		"outDir": "dist",
 		"allowJs": true,
 		"checkJs": true,
@@ -31,7 +34,9 @@
 		"moduleResolution": "Node",
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "react",
+		"jsxFactory": "React.createElement"
 	},
 	"include": [
 		"src"

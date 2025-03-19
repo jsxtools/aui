@@ -1,4 +1,4 @@
-import type { CustomElementConstructor } from "../ssr/element.ts"
+import type { CustomElementConstructor } from "../api/dom.ts"
 
 /** A mixin to provide keyboard-accessible click support to a custom element. */
 export const ClickMixin = <T extends CustomElementConstructor>(Element: T) =>

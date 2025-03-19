@@ -29,3 +29,5 @@ declare global {
 		options?: ShowOpenFilePickerOptions,
 	): Promise<FileSystemFileHandle[]>
 }
+
+export const { showOpenFilePicker } = globalThis

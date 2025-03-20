@@ -1,4 +1,7 @@
+/// <reference types="@vitest/browser/matchers" />
+
 import * as React from "react"
+
 import { expect, test, vi } from "vitest"
 import { render } from "vitest-browser-react"
 import { ClickComponent } from "../../src/react/click.js"

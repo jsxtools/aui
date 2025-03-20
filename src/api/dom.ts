@@ -4,7 +4,6 @@ export const HTMLElement: CustomElementConstructor = globalThis.HTMLElement || c
 
 export interface CustomElement extends HTMLElement {
 	attributeChangedCallback?(name: string, oldValue: string | null, newValue: string | null): void
-
 	connectedCallback?(): void
 	disconnectedCallback?(): void
 }

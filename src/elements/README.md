@@ -25,17 +25,33 @@ customElements.define("my-click", MyClickElement)
 
 ## Drop
 
-The **Drop** custom element provides drag-and-drop support.
+The **Drop** custom element provides drop support.
 
 ```ts
 import { DropElement } from "@jsxtools/aui/elements/drop"
 
 class MyDropElement extends DropElement {
   // your own functionality goes here
+
+  constructor() {
+    super()
+
+    this.addEventListener("dropenter", () => {
+        // do stuff when a drop enters the element
+    })
+
+    this.addEventListener("dropleave", () => {
+        // do stuff when a drop enters the element
+    })
+  }
 }
 
 customElements.define("a-drop", MyDropElement)
 ```
+
+When a potential drop enters the element, the `dropenter` event is fired. When a potential drop leaves the element or is dropped on the element, the `dropleave` event is fired.
+
+While an potential drop enters the element, the `:state(active-drop)` pseudo class will be applied to the element.
 
 ## Internals
 

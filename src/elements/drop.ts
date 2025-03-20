@@ -1,7 +1,7 @@
 import { HTMLElement } from "../api/dom.ts"
 import { DropMixin } from "../mixins/drop.ts"
 
-/** A custom element that provides */
+/** A custom element with drop support. */
 export class DropElement extends DropMixin(HTMLElement) {}
 
 export namespace DropElement {

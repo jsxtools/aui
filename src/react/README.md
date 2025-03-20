@@ -24,7 +24,7 @@ export default function App() {
 
 ## Drop
 
-The **Drop** component provides drag-and-drop support.
+The **Drop** component provides drop support.
 
 ```tsx
 import { DropComponent } from "@jsxtools/aui/react/drop"
@@ -35,6 +35,10 @@ export default function App() {
   )
 }
 ```
+
+When a potential drop enters the component, the `dropenter` event is fired. When a potential drop leaves the component or is dropped on the component, the `dropleave` event is fired.
+
+While an potential drop enters the component, the `:state(active-drop)` pseudo class will be applied to the component.
 
 ## Internals
 

@@ -1,3 +1,5 @@
+/// <reference types="@vitest/browser/matchers" />
+
 import type { FileElement } from "../../src/elements/file.js"
 
 import * as React from "react"

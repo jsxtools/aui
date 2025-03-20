@@ -188,16 +188,12 @@ test("FileElement failed dataTransfer", async () => {
 		dataTransfer: new DataTransfer(),
 	})
 
-	Object.defineProperty(validDropEvent, "dataTransfer", {
-		get() {
-			return {
-				items: [
-					{
-						getAsFile: getAsFileSpy,
-					},
-				],
-			}
-		},
+	Object.defineProperty(validDropEvent.dataTransfer, "items", {
+		value: [
+			{
+				getAsFile: getAsFileSpy,
+			},
+		],
 	})
 
 	element.dispatchEvent(validDropEvent)

@@ -1,3 +1,5 @@
+/// <reference types="@vitest/browser/matchers" />
+
 import type { FormAssociatedFileElement } from "../../src/elements/form-associated-file.js"
 
 import * as React from "react"

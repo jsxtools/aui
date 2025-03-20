@@ -24,6 +24,7 @@ test('DropElement handles "dragover" event', async () => {
 	})
 
 	const preventDefault = vi.spyOn(dragOverEvent, "preventDefault")
+
 	element.dispatchEvent(dragOverEvent)
 
 	expect(preventDefault).toHaveBeenCalled()
@@ -37,6 +38,12 @@ test('DropElement adds "active-drop" state on dragenter', () => {
 	element.dispatchEvent(dragEnterEvent)
 
 	expect(element.internals.states.has("active-drop")).toBe(true)
+
+	element.dispatchEvent(
+		new DragEvent("dragleave", {
+			bubbles: true,
+		}),
+	)
 })
 
 test('DropElement removes "active-drop" state on dragleave', () => {
@@ -84,6 +91,55 @@ test('DropElement removes "active-drop" state on drop', () => {
 	expect(element.internals.states.has("active-drop")).toBe(false)
 })
 
+test('DropElement dispatches "dropenter" / "dropleave" events', () => {
+	const dragEnterEvent = new DragEvent("dragenter", { bubbles: true, cancelable: true })
+	const dragEnterPreventDefault = vi.spyOn(dragEnterEvent, "preventDefault")
+	const dragLeaveEvent = new DragEvent("dragleave", { bubbles: true, cancelable: true })
+	const dragLeavePreventDefault = vi.spyOn(dragEnterEvent, "preventDefault")
+
+	const dropEnterListener = vi.fn((event: DragEvent) => {
+		event.preventDefault()
+	})
+	const dropLeaveListener = vi.fn((event: DragEvent) => {
+		event.preventDefault()
+	})
+
+	element.addEventListener("dropenter", dropEnterListener)
+	element.addEventListener("dropleave", dropLeaveListener)
+
+	element.dispatchEvent(dragEnterEvent)
+
+	expect(dropEnterListener).toHaveBeenCalled()
+	expect(dragEnterPreventDefault).toHaveBeenCalled()
+
+	element.dispatchEvent(dragLeaveEvent)
+
+	expect(dropLeaveListener).toHaveBeenCalled()
+	expect(dragLeavePreventDefault).toHaveBeenCalled()
+})
+
+test('DropElement handles "active-drop" state on multiple dragenter/dragleave events', () => {
+	const dispatch = (name: "dragenter" | "dragleave") => element.dispatchEvent(new DragEvent(name, { bubbles: true }))
+
+	expect(element.internals.states.has("active-drop")).toBe(false)
+
+	dispatch("dragenter")
+
+	expect(element.internals.states.has("active-drop")).toBe(true)
+
+	dispatch("dragenter")
+
+	expect(element.internals.states.has("active-drop")).toBe(true)
+
+	dispatch("dragleave")
+
+	expect(element.internals.states.has("active-drop")).toBe(true)
+
+	dispatch("dragleave")
+
+	expect(element.internals.states.has("active-drop")).toBe(false)
+})
+
 test("DropElement handles lifecycle with and without super methods", () => {
 	// Create a base class without lifecycle methods
 	class BaseElement extends HTMLElement {}
@@ -111,12 +167,17 @@ test("DropElement handles lifecycle with and without super methods", () => {
 
 	// Test element without super lifecycle methods
 	document.body.appendChild(basicElement)
+
 	expect(basicElement.hasAttribute("connected")).toBe(false)
+
 	document.body.removeChild(basicElement)
 
 	// Test element with super lifecycle methods
 	document.body.appendChild(lifecycleElement)
+
 	expect(lifecycleElement.hasAttribute("connected")).toBe(true)
+
 	document.body.removeChild(lifecycleElement)
+
 	expect(lifecycleElement.hasAttribute("connected")).toBe(false)
 })

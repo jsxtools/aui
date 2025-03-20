@@ -1,7 +1,7 @@
 import { HTMLElement } from "../api/dom.ts"
 import { ClickMixin } from "../mixins/click.ts"
 
-/** A Custom Element that provides keyboard-accessible click support. */
+/** A Custom Element with keyboard-accessible click support. */
 export class ClickElement extends ClickMixin(HTMLElement) {}
 
 export namespace ClickElement {

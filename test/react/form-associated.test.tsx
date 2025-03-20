@@ -1,7 +1,11 @@
+/// <reference types="@vitest/browser/matchers" />
+
+import type { FormAssociatedElement } from "../../src/elements/form-associated.js"
+
 import * as React from "react"
+
 import { expect, test, vi } from "vitest"
 import { render } from "vitest-browser-react"
-import type { FormAssociatedElement } from "../../src/elements/form-associated.js"
 import { FormAssociatedComponent } from "../../src/react/form-associated.js"
 
 test("renders FormAssociatedComponent with children", async () => {

@@ -23,15 +23,31 @@ class MyElementWithClickability extends ClickMixin(HTMLElement) {
 
 ## Drop
 
-The **Drop** mixin provides drag-and-drop support to a custom element.
+The **Drop** mixin provides drop support to a custom element.
 
 ```ts
 import { DropMixin } from "@jsxtools/aui/mixins/drop"
 
 class MyElementWitDragAndDrop extends DropMixin(HTMLElement) {
   // your own functionality goes here
+
+  constructor() {
+    super()
+
+    this.addEventListener("dropenter", () => {
+        // do stuff when a drop enters the element
+    })
+
+    this.addEventListener("dropleave", () => {
+        // do stuff when a drop enters the element
+    })
+  }
 }
 ```
+
+When a potential drop enters the element, the `dropenter` event is fired. When a potential drop leaves the element or is dropped on the element, the `dropleave` event is fired.
+
+While an potential drop enters the element, the `:state(active-drop)` pseudo class will be applied to the element.
 
 ## Internals
 

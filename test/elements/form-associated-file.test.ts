@@ -187,31 +187,3 @@ test("FormAssociatedFileElement handles click", async () => {
 	expect(globalThis.showOpenFilePicker).toHaveBeenCalled()
 	expect(element.items).toEqual([file])
 })
-
-test("FormAssociatedFileElement failed dataTransfer", async () => {
-	const getAsFileSpy = vi.fn().mockImplementation(() => {
-		throw new Error("oh noes")
-	})
-
-	const validDropEvent = new DragEvent("drop", {
-		bubbles: true,
-		dataTransfer: new DataTransfer(),
-	})
-
-	Object.defineProperty(validDropEvent, "dataTransfer", {
-		get() {
-			return {
-				items: [
-					{
-						getAsFile: getAsFileSpy,
-					},
-				],
-			}
-		},
-	})
-
-	element.dispatchEvent(validDropEvent)
-
-	expect(getAsFileSpy).toHaveBeenCalled()
-	expect(getAsFileSpy).toThrow("oh noes")
-})

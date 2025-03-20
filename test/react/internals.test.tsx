@@ -1,3 +1,5 @@
+/// <reference types="@vitest/browser/matchers" />
+
 import * as React from "react"
 
 import { expect, test } from "vitest"

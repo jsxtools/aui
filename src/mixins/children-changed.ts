@@ -13,7 +13,9 @@ export const ChildrenChangedMixin = <T extends CustomElementConstructor>(Element
 
 			// conditionally run childrenChangedCallback
 			if (host.hasChildNodes()) {
-				call()
+				scan.takeRecords()
+
+				queueMicrotask(call)
 			}
 		}
 	} as T & ChildrenChangedMixin.Constructor

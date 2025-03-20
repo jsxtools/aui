@@ -1,3 +1,4 @@
+export { ChildrenChangedElement } from "./elements/children-changed.ts"
 export { ClickElement } from "./elements/click.ts"
 export { DragElement } from "./elements/drag.ts"
 export { DropElement } from "./elements/drop.ts"

@@ -1,3 +1,4 @@
+export { ChildrenChangedMixin } from "./mixins/children-changed.ts"
 export { ClickMixin } from "./mixins/click.ts"
 export { DragMixin } from "./mixins/drag.ts"
 export { DropMixin } from "./mixins/drop.ts"

@@ -78,7 +78,7 @@ test("ChildrenChangedElement can be extended", async () => {
 	customElement.textContent = "Changed Content"
 
 	// wait one tick
-	await Promise.resolve(true)
+	await Promise.resolve()
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
@@ -143,7 +143,7 @@ test("ChildrenChangedMixin can be extended", () => {
 	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 })
 
-test("ChildrenChangedMixin works when upgraded", () => {
+test("ChildrenChangedMixin works when upgraded", async () => {
 	const childrenChangedCallbackHandler = vi.fn()
 
 	// Create a superclass that overrides attributeChangedCallback
@@ -160,6 +160,9 @@ test("ChildrenChangedMixin works when upgraded", () => {
 	document.body.innerHTML = `<${elementName}>has content</${elementName}>`
 
 	customElements.define(elementName, UpgradedCustomChildrenChangedElement)
+
+	// wait one tick
+	await Promise.resolve()
 
 	expect(childrenChangedCallbackHandler).toHaveBeenCalledTimes(1)
 

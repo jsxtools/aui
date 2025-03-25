@@ -20,10 +20,10 @@ export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
 			},
 		]
 
-		#items: FileMixin.Mixin["items"] = []
+		#files: FileMixin.Mixin["files"] = []
 
-		get items(): FileMixin.Mixin["items"] {
-			return [...this.#items]
+		get files(): FileMixin.Mixin["files"] {
+			return [...this.#files]
 		}
 
 		#isValidFile(file: File): boolean {
@@ -49,15 +49,15 @@ export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
 		}
 
 		#handleFiles(settledFiles: File[]): void {
-			this.#items = []
+			this.#files = []
 
 			for (const file of settledFiles) {
-				this.#items.push(
+				this.#files.push(
 					file.size > this.maxSize
-						? new FileException("Unsupported file size", "RangeError", file)
+						? new TransferFile(file, { valid: false, rangeOverflow: true }, "Unsupported file size")
 						: !this.#isValidFile(file)
-							? new FileException("Unsupported file type", "TypeError", file)
-							: file,
+							? new TransferFile(file, { valid: false, typeMismatch: true }, "Unsupported file type")
+							: new TransferFile(file),
 				)
 			}
 
@@ -67,19 +67,13 @@ export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
 		#handleDrop(event: DragEvent): void {
 			event.preventDefault()
 
-			try {
-				const files: File[] = []
+			const files: File[] = []
 
-				for (const item of event.dataTransfer!.items) {
-					const file = item.getAsFile()
+			for (const file of event.dataTransfer!.files) {
+				files.push(file)
+			}
 
-					if (file) {
-						files.push(file)
-					}
-				}
-
-				this.#handleFiles(files)
-			} catch {}
+			this.#handleFiles(files)
 		}
 
 		#handleClick(event: MouseEvent): void {
@@ -99,9 +93,16 @@ export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
 
 					return Promise.all(handledFiles)
 				})
-				.then((files) => {
-					this.#handleFiles(files)
-				})
+				.then(
+					(files) => {
+						this.#handleFiles(files)
+					},
+					() => {
+						// if the show file picker is aborted, blocked, or fails (`AbortError`, `SecurityError`, `TypeError`); or,
+						// if a picked file unexpectedly changes or is removed (`NotAllowedError`, `NotFoundError`); then,
+						// such errors are silently ignored
+					},
+				)
 		}
 
 		connectedCallback(): void {
@@ -131,18 +132,32 @@ export namespace FileMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}
 
 	export interface Mixin extends DropMixin.Mixin {
-		items: (File | FileException)[]
+		files: TransferFile[]
 		maxSize: number
 		multiple: boolean
 		types: FilePickerAcceptType[]
 	}
 }
 
-export class FileException extends DOMException {
-	declare name: "RangeError" | "TypeError"
-	declare file: File | null
+export class TransferFile extends File {
+	declare validity: TransferFile.Validity
+	declare validityMessage: string
 
-	constructor(message: string, name: "RangeError" | "TypeError", file = null as File | null) {
-		Object.assign(super(message, name) as unknown as FileException, { file })
+	constructor(file: File, validity: TransferFile.Validity = { valid: true }, validityMessage = "") {
+		super([file], file.name, file)
+
+		this.validity = validity
+		this.validityMessage = validityMessage
+	}
+}
+
+export namespace TransferFile {
+	export interface Validity {
+		/** [MDN Reference](https://developer.mozilla.org/docs/Web/API/ValidityState/rangeOverflow) */
+		rangeOverflow?: boolean
+		/** [MDN Reference](https://developer.mozilla.org/docs/Web/API/ValidityState/typeMismatch) */
+		typeMismatch?: boolean
+		/** [MDN Reference](https://developer.mozilla.org/docs/Web/API/ValidityState/valid) */
+		valid: boolean
 	}
 }

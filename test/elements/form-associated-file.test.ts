@@ -1,7 +1,7 @@
 import { userEvent } from "@vitest/browser/context"
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
 import { FormAssociatedFileElement } from "../../src/elements/form-associated-file.js"
-import { FileException } from "../../src/mixins/file.js"
+import { TransferFile } from "../../src/mixins/file.js"
 
 let form: HTMLFormElement
 let element: FormAssociatedFileElement
@@ -28,7 +28,7 @@ afterAll(() => {
 test("FormAssociatedFileElement has correct default properties", () => {
 	expect(element.maxSize).toBe(Number.POSITIVE_INFINITY)
 	expect(element.multiple).toBe(false)
-	expect(element.items).toEqual([])
+	expect(element.files).toEqual([])
 	expect(element.types).toEqual([
 		{
 			description: "All Files",
@@ -62,7 +62,7 @@ test("FormAssociatedFileElement validates file types", async () => {
 
 	const validFile = new File(["test"], "test.png", { type: "image/png" })
 	const invalidFile = new File(["test"], "test.txt", { type: "text/plain" })
-	const invalidFileError = new FileException("Unsupported file type", "TypeError", invalidFile)
+	const invalidFileError = new TransferFile(invalidFile, { valid: false, typeMismatch: true }, "Unsupported file type")
 
 	// Mock drop event with valid file
 	const validDropEvent = new DragEvent("drop", {
@@ -79,7 +79,7 @@ test("FormAssociatedFileElement validates file types", async () => {
 
 	element.dispatchEvent(validDropEvent)
 
-	expect(element.items).toEqual([validFile, invalidFileError])
+	expect(element.files).toEqual([new TransferFile(validFile), invalidFileError])
 	expect(element.validity.valid).toBe(true)
 	expect(inputEventSpy).toHaveBeenCalled()
 	expect(changeEventSpy).toHaveBeenCalled()
@@ -93,7 +93,7 @@ test("FormAssociatedFileElement validates file types", async () => {
 
 	element.dispatchEvent(invalidDropEvent)
 
-	expect(element.items).toEqual([new FileException("Unsupported file type", "TypeError", invalidFile)])
+	expect(element.files).toEqual([new TransferFile(invalidFile, { valid: false, typeMismatch: true }, "Unsupported file type")])
 	expect(element.validity.typeMismatch).toBe(true)
 	expect(element.validationMessage).toBe("Unsupported file type")
 })
@@ -114,7 +114,7 @@ test("FormAssociatedFileElement validates file size", () => {
 
 	element.dispatchEvent(largeDropEvent)
 
-	expect(element.items).toEqual([new FileException("Unsupported file size", "RangeError", largeFile)])
+	expect(element.files).toEqual([new TransferFile(largeFile, { valid: false, rangeOverflow: true }, "Unsupported file size")])
 	expect(element.validity.rangeOverflow).toBe(true)
 	expect(element.validationMessage).toBe("Unsupported file size")
 
@@ -127,7 +127,7 @@ test("FormAssociatedFileElement validates file size", () => {
 
 	element.dispatchEvent(smallDropEvent)
 
-	expect(element.items).toEqual([smallFile])
+	expect(element.files).toEqual([new TransferFile(smallFile)])
 	expect(element.validity.valid).toBe(true)
 })
 
@@ -148,7 +148,7 @@ test("FormAssociatedFileElement handles multiple files", () => {
 
 	element.dispatchEvent(dropEvent)
 
-	expect(element.items).toEqual([file1, file2])
+	expect(element.files).toEqual([new TransferFile(file1), new TransferFile(file2)])
 	expect(element.validity.valid).toBe(true)
 })
 
@@ -169,21 +169,23 @@ test("FormAssociatedFileElement detects files with missing types", () => {
 		}),
 	)
 
-	expect(element.items).toEqual([fileWithMissingType])
+	expect(element.files).toEqual([new TransferFile(fileWithMissingType, { valid: true }, "")])
 	expect(element.validity.valid).toBe(true)
 })
 
 test("FormAssociatedFileElement handles click", async () => {
 	const file = new File(["test"], "test.txt", { type: "text/plain" })
-
-	globalThis.showOpenFilePicker = vi.fn().mockResolvedValue([
+	const { showOpenFilePicker } = globalThis
+	const fakeFilePicker = (globalThis.showOpenFilePicker = vi.fn().mockResolvedValue([
 		{
 			getFile: vi.fn().mockResolvedValue(file),
 		},
-	])
+	]))
 
 	await userEvent.click(element)
 
-	expect(globalThis.showOpenFilePicker).toHaveBeenCalled()
-	expect(element.items).toEqual([file])
+	globalThis.showOpenFilePicker = showOpenFilePicker
+
+	expect(fakeFilePicker).toHaveBeenCalled()
+	expect(element.files).toEqual([new TransferFile(file, { valid: true }, "")])
 })

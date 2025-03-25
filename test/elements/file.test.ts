@@ -1,7 +1,7 @@
 import { userEvent } from "@vitest/browser/context"
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
 import { FileElement } from "../../src/elements/file.js"
-import { FileException, FileMixin } from "../../src/mixins/file.js"
+import { FileMixin, TransferFile } from "../../src/mixins/file.js"
 
 let element: FileElement
 
@@ -23,7 +23,7 @@ afterAll(() => {
 test("FileElement has correct default properties", () => {
 	expect(element.maxSize).toBe(Number.POSITIVE_INFINITY)
 	expect(element.multiple).toBe(false)
-	expect(element.items).toEqual([])
+	expect(element.files).toEqual([])
 	expect(element.types).toEqual([
 		{
 			description: "All Files",
@@ -69,7 +69,7 @@ test("FileElement validates file types", async () => {
 
 	element.dispatchEvent(validDropEvent)
 
-	expect(element.items).toEqual([validFile])
+	expect(element.files).toEqual([new TransferFile(validFile)])
 	expect(inputEventSpy).toHaveBeenCalled()
 
 	// Mock drop event with invalid file
@@ -83,7 +83,7 @@ test("FileElement validates file types", async () => {
 
 	element.dispatchEvent(invalidDropEvent)
 
-	expect(element.items).toEqual([new FileException("Unsupported file type", "TypeError", invalidFile)])
+	expect(element.files).toEqual([new TransferFile(invalidFile, { valid: false, typeMismatch: true }, "Unsupported file type")])
 })
 
 test("FileElement validates file size", () => {
@@ -103,7 +103,7 @@ test("FileElement validates file size", () => {
 
 	element.dispatchEvent(largeDropEvent)
 
-	expect(element.items).toEqual([new FileException("Unsupported file size", "RangeError", largeFile)])
+	expect(element.files).toEqual([new TransferFile(largeFile, { valid: false, rangeOverflow: true }, "Unsupported file size")])
 
 	// Test with a small file
 
@@ -118,7 +118,7 @@ test("FileElement validates file size", () => {
 
 	element.dispatchEvent(smallDropEvent)
 
-	expect(element.items).toEqual([smallFile])
+	expect(element.files).toEqual([new TransferFile(smallFile)])
 })
 
 test("FileElement handles multiple files", () => {
@@ -138,7 +138,7 @@ test("FileElement handles multiple files", () => {
 
 	element.dispatchEvent(dropEvent)
 
-	expect(element.items).toEqual([file1, file2])
+	expect(element.files).toEqual([new TransferFile(file1), new TransferFile(file2)])
 })
 
 test("FileElement detects files with missing types", () => {
@@ -158,48 +158,45 @@ test("FileElement detects files with missing types", () => {
 		}),
 	)
 
-	expect(element.items).toEqual([fileWithMissingType])
+	expect(element.files).toEqual([new TransferFile(fileWithMissingType)])
 })
 
 test("FileElement handles click", async () => {
+	const { showOpenFilePicker } = globalThis
 	const file = new File(["test"], "test.txt", { type: "text/plain" })
 
-	globalThis.showOpenFilePicker = vi.fn().mockResolvedValue([
+	const fakeFilePicker = (globalThis.showOpenFilePicker = vi.fn().mockResolvedValue([
 		{
 			getFile() {
 				return file
 			},
 		},
-	])
+	]))
 
 	await userEvent.click(element)
 
-	expect(globalThis.showOpenFilePicker).toHaveBeenCalled()
-	expect(element.items).toEqual([file])
+	globalThis.showOpenFilePicker = showOpenFilePicker
+
+	expect(fakeFilePicker).toHaveBeenCalled()
+	expect(element.files).toEqual([new TransferFile(file)])
 })
 
-test("FileElement failed dataTransfer", async () => {
-	const getAsFileSpy = vi.fn().mockImplementation(() => {
-		throw new Error("oh noes")
-	})
+test("FileElement handles abort", async () => {
+	const { showOpenFilePicker } = globalThis
 
-	const validDropEvent = new DragEvent("drop", {
-		bubbles: true,
-		dataTransfer: new DataTransfer(),
-	})
-
-	Object.defineProperty(validDropEvent.dataTransfer, "items", {
-		value: [
-			{
-				getAsFile: getAsFileSpy,
+	const fakeFilePicker = (globalThis.showOpenFilePicker = vi.fn().mockResolvedValue([
+		{
+			async getFile() {
+				throw new Error("Abort")
 			},
-		],
-	})
+		},
+	]))
 
-	element.dispatchEvent(validDropEvent)
+	await userEvent.click(element)
 
-	expect(getAsFileSpy).toHaveBeenCalled()
-	expect(getAsFileSpy).toThrow("oh noes")
+	globalThis.showOpenFilePicker = showOpenFilePicker
+
+	expect(fakeFilePicker).toHaveBeenCalled()
 })
 
 test("FileElement can be extended", () => {

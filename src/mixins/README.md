@@ -4,10 +4,11 @@ A collection of reusable mixins to enhance custom elements with additional funct
 
 - **[Click](#click)**: A mixin that provides keyboard-accessible click support to a custom element.
 - **[Drop](#drop)**: A mixin that provides drag-and-drop support with visual state feedback to a custom element.
+- **[File](#file)**: A mixin that provides file picker and file drop support with visual state feedback to a custom element.
 - **[Internals](#internals)**: A mixin that provides the ElementInternals API to a custom element.
 - **[Shadow](#shadow)**: A mixin that provides a configurable ShadowRoot to a custom element.
-- **[FormAssociated](#form-associated)**: A mixin that provides form association and validation support to a custom element.
-- **[FormAssociatedFile](#form-associated-file)**: A mixin that provides file upload support with form association and validation to a custom element.
+- **[Form-Associated](#form-associated)**: A mixin that provides form association and validation support to a custom element.
+- **[Form-Associated File](#form-associated-file)**: A mixin that provides file upload support with form association and validation to a custom element.
 
 ## Click
 
@@ -48,6 +49,32 @@ class MyElementWitDragAndDrop extends DropMixin(HTMLElement) {
 When a potential drop enters the element, the `dropenter` event is fired. When a potential drop leaves the element or is dropped on the element, the `dropleave` event is fired.
 
 While an potential drop enters the element, the `:state(active-drop)` pseudo class will be applied to the element.
+
+## File
+
+The **File** mixin provides file picker and file drop support to a custom element.
+
+```ts
+import { FileMixin } from "@jsxtools/aui/mixins/file"
+
+class MyElementWithFile extends FileMixin(HTMLElement) {
+  // your own functionality goes here
+  // + anything you could do with DropMixin
+
+  constructor() {
+    super()
+
+    this.addEventListener("input", () => {
+        // do stuff when a file (or files) are added
+
+        for (const file of this.files) {
+          console.log(file) // TransferFile, subset of File
+
+          file.valid // boolean, validity of File based on `maxSize` & `types`
+    })
+  }
+}
+```
 
 ## Internals
 

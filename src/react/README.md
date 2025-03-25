@@ -4,6 +4,7 @@ A collection of unstyled React components for building accessible web applicatio
 
 - **[Click](#click)**: A component that provides keyboard-accessible click support.
 - **[Drop](#drop)**: A component that provides drag-and-drop support with visual state feedback.
+- **[File](#file)**: A component that provides file picker and file drop support with visual state feedback.
 - **[Internals](#internals)**: A component that provides the ElementInternals API.
 - **[Form-Associated](#form-associated)**: A component that provides form association and validation support.
 - **[Form-Associated File](#form-associated-file)**: A component that provides file upload support with form association and validation.
@@ -39,6 +40,20 @@ export default function App() {
 When a potential drop enters the component, the `dropenter` event is fired. When a potential drop leaves the component or is dropped on the component, the `dropleave` event is fired.
 
 While an potential drop enters the component, the `:state(active-drop)` pseudo class will be applied to the component.
+
+## File
+
+The **File** component provides file picker and file drop support.
+
+```tsx
+import { FileComponent } from "@jsxtools/aui/react/file"
+
+export default function App() {
+  return (
+    <FileComponent>I can receive file drops and I can be clicked to pick a file.</FileComponent>
+  )
+}
+```
 
 ## Internals
 

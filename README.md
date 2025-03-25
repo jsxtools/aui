@@ -13,6 +13,7 @@
 - 🚀 **Zero Dependencies**: Lightweight and framework-agnostic
 - 🎯 **React Exports**: Every custom element is available as a React component
 - 📦 **Tree-shakeable**: Only import what you need
+- 🎨 **Fully Covered**: Full 100% test coverage
 
 ## Installation
 

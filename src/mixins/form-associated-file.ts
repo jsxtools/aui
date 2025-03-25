@@ -1,7 +1,7 @@
 import type { CustomElementConstructor } from "../api/dom.ts"
 import type { FilePickerAcceptType } from "../api/show-open-file-picker.ts"
 
-import { type FileException, FileMixin } from "./file.ts"
+import { FileMixin } from "./file.ts"
 import { FormAssociatedMixin } from "./form-associated.ts"
 
 /** A mixin to provide form association and validation to a custom element. */
@@ -21,21 +21,16 @@ export const FormAssociatedFileMixin = <T extends CustomElementConstructor>(Elem
 
 			let hasSuccess = false
 
-			for (const item of this.items) {
-				if (item instanceof File) {
-					data.append(this.name, item)
+			for (const file of this.files) {
+				if (file.validity.valid) {
+					data.append(this.name, file)
 
 					hasSuccess = true
 				}
 			}
 
-			if (hasSuccess === false && this.items.length > 0) {
-				this.internals.setValidity(
-					{
-						[(this.items[0] as FileException).name === "RangeError" ? "rangeOverflow" : "typeMismatch"]: true,
-					},
-					(this.items[0] as FileException).message,
-				)
+			if (hasSuccess === false && this.files.length > 0) {
+				this.internals.setValidity(this.files[0]!.validity, this.files[0]!.validityMessage)
 			} else {
 				this.internals.setValidity({})
 			}

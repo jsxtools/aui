@@ -4,6 +4,7 @@ A collection of custom elements that provide special functionality:
 
 - **[Click](#click)**: A custom element that provides keyboard-accessible click support.
 - **[Drop](#drop)**: A custom element that provides drag-and-drop support with visual state feedback.
+- **[File](#file)**: A custom element that provides file picker and file drop support with visual state feedback.
 - **[Internals](#internals)**: A custom element that provides the ElementInternals API.
 - **[Shadow](#shadow)**: A custom elements that provides a configurable ShadowRoot.
 - **[Form-Associated](#form-associated)**: A custom element that provides form association and validation support.
@@ -52,6 +53,34 @@ customElements.define("a-drop", MyDropElement)
 When a potential drop enters the element, the `dropenter` event is fired. When a potential drop leaves the element or is dropped on the element, the `dropleave` event is fired.
 
 While an potential drop enters the element, the `:state(active-drop)` pseudo class will be applied to the element.
+
+## File
+
+The **File** custom element provides file picker and file drop support.
+
+```ts
+import { FileElement } from "@jsxtools/aui/elements/file"
+
+class MyFileElement extends FileElement {
+  // your own functionality goes here
+  // + anything you could do with DropElement
+
+  constructor() {
+    super()
+
+    this.addEventListener("input", () => {
+        // do stuff when a file (or files) are added
+
+        for (const file of this.files) {
+          console.log(file) // TransferFile, subset of File
+
+          file.valid // boolean, validity of File based on `maxSize` & `types`
+    })
+  }
+}
+
+customElements.define("a-file", MyFileElement)
+```
 
 ## Internals
 

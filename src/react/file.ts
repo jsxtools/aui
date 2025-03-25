@@ -2,7 +2,7 @@ import type { FilePickerAcceptType } from "../api.ts"
 
 import { createElement, useCallback } from "react"
 import { customElements } from "../api/dom.ts"
-import { FileElement } from "../elements/file.ts"
+import { FileElement, TransferFile } from "../elements/file.ts"
 import { without } from "./_without.ts"
 
 customElements.define("a-file", FileElement)
@@ -38,6 +38,8 @@ export namespace FileComponent {
 
 	export interface Props extends React.ComponentProps<"a-file"> {}
 }
+
+export { TransferFile }
 
 declare global {
 	interface HTMLElementTagNameMap {

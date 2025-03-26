@@ -59,6 +59,10 @@ export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
 							? new TransferFile(file, { valid: false, typeMismatch: true }, "Unsupported file type")
 							: new TransferFile(file),
 				)
+
+				if (!this.multiple) {
+					break
+				}
 			}
 
 			this.dispatchEvent(new Event("input", { bubbles: true }))

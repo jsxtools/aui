@@ -1,9 +1,10 @@
 import { createElement } from "react"
-import { customElements } from "../api/dom.ts"
+import { customElements } from "../api/custom-elements.ts"
 import { DragElement } from "../elements/drag.ts"
 
 customElements.define("a-drag", DragElement)
 
+/** A component with drag support. */
 export const DragComponent = (props: DragComponent.Props) => createElement("a-drag", props)
 
 export namespace DragComponent {

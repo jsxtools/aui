@@ -1,12 +1,13 @@
 import type { FilePickerAcceptType } from "../api.ts"
 
 import { createElement, useCallback } from "react"
-import { customElements } from "../api/dom.ts"
+import { customElements } from "../api/custom-elements.ts"
 import { FormAssociatedFileElement } from "../elements/form-associated-file.ts"
 import { without } from "./_without.ts"
 
 customElements.define("a-form-associated-file", FormAssociatedFileElement)
 
+/** A component with file-drop & file-picker support, and form association & validation. */
 export const FormAssociatedFileComponent = ({ ref, ...props }: FormAssociatedFileComponent.Props) =>
 	createElement("a-form-associated-file", {
 		...without(props, "excludeAcceptAllOption", "maxSize", "types", "value"),

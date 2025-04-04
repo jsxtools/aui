@@ -1,7 +1,7 @@
-import type { CustomElementConstructor } from "../api/dom.ts"
+import type { CustomElementConstructor } from "../types.ts"
 
 /** A mixin to provide keyboard-accessible click support to a custom element. */
-export const ClickMixin = <T extends CustomElementConstructor>(Element: T) =>
+export const ClickMixin = <T extends CustomElementConstructor>(Element: T): T & ClickMixin.Constructor =>
 	class extends Element {
 		#handleKeydown(event: KeyboardEvent): void {
 			if (event.key === "Enter" || event.key === " ") {
@@ -34,7 +34,7 @@ export const ClickMixin = <T extends CustomElementConstructor>(Element: T) =>
 
 			super.disconnectedCallback?.()
 		}
-	} as T & ClickMixin.Constructor
+	}
 
 export namespace ClickMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}

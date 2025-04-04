@@ -1,9 +1,10 @@
 import { createElement } from "react"
-import { customElements } from "../api/dom.ts"
+import { customElements } from "../api/custom-elements.ts"
 import { InternalsElement } from "../elements/internals.ts"
 
 customElements.define("a-internals", InternalsElement)
 
+/** A component that provides the ElementInternals API. */
 export const InternalsComponent = (props: InternalsComponent.Props) => createElement("a-internals", props)
 
 export namespace InternalsComponent {

@@ -1,9 +1,10 @@
 import { createElement } from "react"
-import { customElements } from "../api/dom.ts"
+import { customElements } from "../api/custom-elements.ts"
 import { ClickElement } from "../elements/click.ts"
 
 customElements.define("a-click", ClickElement)
 
+/** A component with keyboard-accessible click support. */
 export const ClickComponent = (props: ClickComponent.Props) => createElement("a-click", props)
 
 export namespace ClickComponent {

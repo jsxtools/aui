@@ -202,7 +202,6 @@ test("FileElement handles abort", async () => {
 test("FileElement can be extended", () => {
 	const connectedCallbackHandler = vi.fn()
 	const disconnectedCallbackHandler = vi.fn()
-	const attributeChangedCallbackHandler = vi.fn()
 
 	class CustomFileElement extends FileElement {
 		connectedCallback(): void {
@@ -216,12 +215,6 @@ test("FileElement can be extended", () => {
 
 			disconnectedCallbackHandler()
 		}
-
-		attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-			super.attributeChangedCallback?.(name, oldValue, newValue)
-
-			attributeChangedCallbackHandler(name, oldValue, newValue)
-		}
 	}
 
 	const elementName = `test-custom-form-associated`
@@ -232,33 +225,28 @@ test("FileElement can be extended", () => {
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(0)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	document.body.appendChild(customElement)
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	customElement.setAttribute("multiple", "")
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(1)
 
 	document.body.removeChild(customElement)
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(1)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(1)
 })
 
 test("FileMixin can be extended", () => {
 	const connectedCallbackHandler = vi.fn()
 	const disconnectedCallbackHandler = vi.fn()
-	const attributeChangedCallbackHandler = vi.fn()
 
-	// Create a superclass that overrides attributeChangedCallback
+	// Create a superclass that overrides callbacks
 	class SuperElement extends HTMLElement {
 		connectedCallback(): void {
 			connectedCallbackHandler()
@@ -266,10 +254,6 @@ test("FileMixin can be extended", () => {
 
 		disconnectedCallback(): void {
 			disconnectedCallbackHandler()
-		}
-
-		attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-			attributeChangedCallbackHandler(name, oldValue, newValue)
 		}
 	}
 
@@ -283,23 +267,19 @@ test("FileMixin can be extended", () => {
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(0)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	document.body.appendChild(customElement)
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	customElement.setAttribute("multiple", "")
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(1)
 
 	document.body.removeChild(customElement)
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(1)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(1)
 })

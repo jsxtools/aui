@@ -1,16 +1,16 @@
-import type { CustomElementConstructor } from "../api/dom.ts"
+import type { CustomElementConstructor } from "../types.ts"
 
 /** A mixin to provide a configurable ShadowRoot to a custom element. */
-export const ShadowMixin = <T extends CustomElementConstructor>(Element: T) =>
+export const ShadowMixin = <T extends CustomElementConstructor>(Element: T): T & ShadowMixin.Constructor =>
 	class extends Element {
-		static shadowRootMode = "open" as ShadowRootMode
-		static shadowRootDelegatesFocus = false as boolean
-		static shadowRootSerializable = false as boolean
-		static shadowRootSlotAssignment = "named" as SlotAssignmentMode
-		static shadowRootInnerHTML = "<slot>" as string | null
-		static shadowRootAdoptedStyleSheets = [] as CSSStyleSheet[]
+		static shadowRootMode: ShadowRootMode = "open"
+		static shadowRootDelegatesFocus = false
+		static shadowRootSerializable = false
+		static shadowRootSlotAssignment: SlotAssignmentMode = "named"
+		static shadowRootInnerHTML: string | null = "<slot>"
+		static shadowRootAdoptedStyleSheets: CSSStyleSheet[] = []
 
-		shadowRoot = Object.assign(
+		shadowRoot: ShadowRoot = Object.assign(
 			this.attachShadow({
 				mode: (this.constructor as ShadowMixin.Constructor).shadowRootMode,
 				delegatesFocus: (this.constructor as ShadowMixin.Constructor).shadowRootDelegatesFocus,
@@ -21,8 +21,8 @@ export const ShadowMixin = <T extends CustomElementConstructor>(Element: T) =>
 				innerHTML: (this.constructor as ShadowMixin.Constructor).shadowRootInnerHTML,
 				adoptedStyleSheets: (this.constructor as ShadowMixin.Constructor).shadowRootAdoptedStyleSheets,
 			},
-		) as ShadowRoot
-	} as T & ShadowMixin.Constructor
+		)
+	}
 
 export namespace ShadowMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {

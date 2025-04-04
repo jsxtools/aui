@@ -1,12 +1,13 @@
-import type { FilePickerAcceptType } from "../api.ts"
+import type { FilePickerAcceptType } from "../api/show-open-file-picker.ts"
 
 import { createElement, useCallback } from "react"
-import { customElements } from "../api/dom.ts"
+import { customElements } from "../api/custom-elements.ts"
 import { FileElement, TransferFile } from "../elements/file.ts"
 import { without } from "./_without.ts"
 
 customElements.define("a-file", FileElement)
 
+/** A component with file-drop and file-picker support. */
 export const FileComponent = ({ ref, ...props }: FileComponent.Props) =>
 	createElement("a-file", {
 		...without(props, "maxSize", "types", "value"),

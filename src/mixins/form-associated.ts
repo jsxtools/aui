@@ -1,31 +1,27 @@
-import type { CustomElementConstructor } from "../api/dom.ts"
+import type { CustomElementConstructor } from "../types.ts"
 
-import { ClickMixin } from "./click.ts"
 import { InternalsMixin } from "./internals.ts"
 
 /** A mixin to provide form association and validation support to a custom element. */
-export const FormAssociatedMixin = <T extends CustomElementConstructor>(Element: T) =>
-	class extends ClickMixin(InternalsMixin(Element)) {
+export const FormAssociatedMixin = <T extends CustomElementConstructor>(Element: T): T & FormAssociatedMixin.Constructor =>
+	class extends InternalsMixin(Element) {
 		static formAssociated = true
-		static observedAttributes = ["disabled", "required", ...(super.observedAttributes || [])]
-
-		#disabled: boolean | undefined
-		#required: boolean | undefined
+		static observedAttributes = ["disabled", "required", "value", ...(super.observedAttributes || [])]
 
 		get disabled(): boolean {
-			return this.#disabled ?? this.hasAttribute("disabled")
+			return this.hasAttribute("disabled")
 		}
 
-		set disabled(flag) {
-			this.internals.ariaDisabled = String((this.#disabled = Boolean(flag)))
+		set disabled(flag: boolean) {
+			this.toggleAttribute("disabled", flag)
 		}
 
 		get required(): boolean {
-			return this.#required ?? this.hasAttribute("required")
+			return this.hasAttribute("required")
 		}
 
-		set required(flag) {
-			this.internals.ariaRequired = String((this.#required = Boolean(flag)))
+		set required(flag: boolean) {
+			this.toggleAttribute("required", flag)
 		}
 
 		set name(name) {
@@ -76,14 +72,14 @@ export const FormAssociatedMixin = <T extends CustomElementConstructor>(Element:
 
 		attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 			if (name === "disabled") {
-				this.disabled = newValue !== null
+				this.internals.ariaDisabled = String(newValue !== null)
 			} else if (name === "required") {
-				this.required = newValue !== null
+				this.internals.ariaRequired = String(newValue !== null)
 			}
 
 			super.attributeChangedCallback?.(name, oldValue, newValue)
 		}
-	} as T & FormAssociatedMixin.Constructor
+	}
 
 export namespace FormAssociatedMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}

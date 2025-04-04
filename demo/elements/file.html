@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>File Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="File Element" />
+		<meta name="description" content="A custom element with file-drop and file-picker support." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { FileElement } from "./file.js"
+
+			customElements.define("a-file", FileElement)
+		</script>
+		<style>
+			a-file {
+				display: block;
+				height: 150px;
+				width: 300px;
+				border-radius: 0.125rem;
+				outline: 1px dashed var(--CanvasText);
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>File Element</h1>
+		<p>A custom element with file-drop and file-picker support.</p>
+		<a-file tabindex="0"></a-file>
+
+		<h4>example.html</h4>
+		<pre><code>&lt;a-file tabindex="0"&gt;&lt;/a-file&gt;</code></pre>
+
+		<h4>example.js</h4>
+		<pre><code>import { FileElement } from "https://cdn.jsdelivr.net/npm/@jsxtools/aui/dist/elements/file.js"
+
+customElements.define("a-file", FileElement)
+		</code></pre>
+	</body>
+</html>

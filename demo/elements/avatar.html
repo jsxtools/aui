@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Avatar Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Avatar Element" />
+		<meta name="description" content="A custom element that provides collapsible sections by headings." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { AvatarElement } from "./avatar.js"
+
+			customElements.define("a-avatar", AvatarElement)
+		</script>
+		<style>
+			a-avatar {
+				display: inline-flex;
+				/* Layout */
+				aspect-ratio: 1;
+				place-content: center;
+				place-items: center;
+				width: 4rem;
+				/* Text */
+				font-weight: 500;
+				/* Appearance */
+				background-color: oklch(28% 0.75% 264deg/65%);
+				border-radius: calc(infinity * 1px);
+				color: oklch(95% 0.5% 264deg/90%);
+				outline: 1px solid rgb(0 0 0/5%);
+				outline-offset: -1px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Avatar Element</h1>
+		<p>A custom element that provides an easily stylable avatar image.</p>
+
+		<div style="display: flex; gap: 20px;">
+			<a-avatar src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=128&h=128&dpr=2&q=80">LT</a-avatar>
+			<a-avatar>LT</a-avatar>
+		</div>
+
+		<h4>example.html</h4>
+		<pre><code>&lt;a-avatar src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=128&h=128&dpr=2&q=80"&gt;LT&lt;/a-avatar&gt;
+&lt;a-avatar&gt;LT&lt;/a-avatar&gt;</code></pre>
+
+		<h4>example.js</h4>
+		<pre><code>import { AvatarElement } from "https://cdn.jsdelivr.net/npm/@jsxtools/aui/dist/elements/avatar.js"
+
+customElements.define("a-avatar", AvatarElement)
+		</code></pre>
+	</body>
+</html>

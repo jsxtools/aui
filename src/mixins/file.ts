@@ -1,15 +1,24 @@
-import type { CustomElementConstructor } from "../api/dom.ts"
 import type { FilePickerAcceptType } from "../api/show-open-file-picker.ts"
+import type { CustomElementConstructor } from "../types.ts"
 
 import { DropMixin } from "./drop.ts"
 
 /** A mixin to provide file drop and file picker support to a custom element. */
-export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
+export const FileMixin = <T extends CustomElementConstructor>(Element: T): T & FileMixin.Constructor =>
 	class extends DropMixin(Element) {
-		static observedAttributes = ["multiple", ...(super.observedAttributes || [])]
-
 		maxSize = Number.POSITIVE_INFINITY
-		multiple = false
+
+		get multiple(): boolean {
+			return this.hasAttribute("multiple")
+		}
+
+		set multiple(value: boolean) {
+			this.toggleAttribute("multiple", value)
+		}
+
+		get files(): FileMixin.Mixin["files"] {
+			return [...this.#files]
+		}
 
 		types: FilePickerAcceptType[] = [
 			{
@@ -21,10 +30,6 @@ export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
 		]
 
 		#files: FileMixin.Mixin["files"] = []
-
-		get files(): FileMixin.Mixin["files"] {
-			return [...this.#files]
-		}
 
 		#isValidFile(file: File): boolean {
 			for (const type of this.types) {
@@ -122,15 +127,7 @@ export const FileMixin = <T extends CustomElementConstructor>(Element: T) =>
 
 			super.disconnectedCallback?.()
 		}
-
-		attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-			if (name === "multiple") {
-				this.multiple = newValue !== null
-			}
-
-			super.attributeChangedCallback?.(name, oldValue, newValue)
-		}
-	} as T & FileMixin.Constructor
+	}
 
 export namespace FileMixin {
 	export interface Constructor extends CustomElementConstructor<Mixin> {}

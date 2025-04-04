@@ -1,9 +1,10 @@
 import { createElement } from "react"
-import { customElements } from "../api/dom.ts"
+import { customElements } from "../api/custom-elements.ts"
 import { DropElement } from "../elements/drop.ts"
 
 customElements.define("a-drop", DropElement)
 
+/** A component with drop support. */
 export const DropComponent = (props: DropComponent.Props) => createElement("a-drop", props)
 
 export namespace DropComponent {

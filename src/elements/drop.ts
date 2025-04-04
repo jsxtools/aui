@@ -1,4 +1,4 @@
-import { HTMLElement } from "../api/dom.ts"
+import { HTMLElement } from "../api/html-element.ts"
 import { DropMixin } from "../mixins/drop.ts"
 
 /** A custom element with drop support. */

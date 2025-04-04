@@ -5,14 +5,19 @@
 	},
 	"linter": {
 		"rules": {
+			"complexity": {
+				"noThisInStatic": "off"
+			},
 			"correctness": {
+				"noUnknownProperty": "off",
 				"noUnusedVariables": "error"
 			},
 			"suspicious": {
 				"noAssignInExpressions": "off",
 				"noEmptyInterface": "off",
 				"noExplicitAny": "off",
-				"noRedeclare": "off"
+				"noRedeclare": "off",
+				"noShadowRestrictedNames": "off"
 			},
 			"style": {
 				"noNonNullAssertion": "off",

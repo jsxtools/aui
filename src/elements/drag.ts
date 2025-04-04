@@ -1,4 +1,4 @@
-import { HTMLElement } from "../api/dom.ts"
+import { HTMLElement } from "../api/html-element.ts"
 import { DragMixin } from "../mixins/drag.ts"
 
 /** A custom element with drag support. */

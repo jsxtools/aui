@@ -1,7 +1,7 @@
-import { HTMLElement } from "../api/dom.ts"
+import { HTMLElement } from "../api/html-element.ts"
 import { ChildrenChangedMixin } from "../mixins/children-changed.ts"
 
-/** A Custom Element with keyboard-accessible click support. */
+/** A custom element that provides children observation support. */
 export class ChildrenChangedElement extends ChildrenChangedMixin(HTMLElement) {}
 
 export namespace ChildrenChangedElement {

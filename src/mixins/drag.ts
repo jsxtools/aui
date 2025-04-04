@@ -1,9 +1,9 @@
-import type { CustomElementConstructor } from "../api/dom.ts"
+import type { CustomElementConstructor } from "../types.ts"
 
 import { InternalsMixin } from "./internals.ts"
 
 /** A mixin to provide drag support to a custom element. */
-export const DragMixin = <T extends CustomElementConstructor>(Element: T) =>
+export const DragMixin = <T extends CustomElementConstructor>(Element: T): T & DragMixin.Constructor =>
 	class Draggable extends InternalsMixin(Element) {
 		static observedAttributes = ["draggable", ...(super.observedAttributes || [])]
 

@@ -23,7 +23,7 @@ export default defineConfig({
 			reporter: ["json", "text"],
 			reportsDirectory: "./coverage",
 			include: ["src/{api/elements,mixins,react}/*.ts"],
-			exclude: ["src/**/_*.ts", "src/**/_*.tsx"],
+			exclude: ["src/**/_*.ts", "src/**/_*.tsx", "src/{api/elements,mixins}/{accordion,avatar,checkbox,form-associated-radio}.ts"],
 		},
 	},
 })

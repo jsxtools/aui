@@ -1,7 +1,7 @@
-import { HTMLElement } from "../api/dom.ts"
+import { HTMLElement } from "../api/html-element.ts"
 import { FileMixin, TransferFile } from "../mixins/file.ts"
 
-/** A Custom Element with file-drop and file-picker support. */
+/** A custom element with file-drop and file-picker support. */
 export class FileElement extends FileMixin(HTMLElement) {}
 
 export namespace FileElement {

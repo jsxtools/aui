@@ -4,7 +4,7 @@
 [![Build Status][cli-img]][cli-url]
 [![Coverage][cov-img]][cov-url]
 
-**AUI** is a baseline UI available as Mixins, Custom Elements, and React Components, enabling you to build accessible and reusable components in whatever development environment you prefer.
+**AUI** is a baseline UI available as Mixins, Custom Elements, and React Components, enabling you to build components in whatever development environment you prefer.
 
 ## Features
 

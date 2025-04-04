@@ -18,7 +18,7 @@ import { ClickComponent } from "@jsxtools/aui/react/click"
 
 export default function App() {
   return (
-    <ClickComponent>I can be accessibly clicked.</ClickComponent>
+    <ClickComponent>I can be clicked with keyboard.</ClickComponent>
   )
 }
 ```

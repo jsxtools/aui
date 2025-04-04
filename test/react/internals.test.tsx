@@ -4,7 +4,8 @@ import * as React from "react"
 
 import { expect, test } from "vitest"
 import { render } from "vitest-browser-react"
-import { InternalsComponent } from "../../src/react/internals.js"
+
+import { InternalsComponent } from "../../src/react/internals-component.ts"
 
 test("renders InternalsComponent with children", async () => {
 	const testContent = "Test Content"

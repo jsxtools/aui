@@ -4,16 +4,14 @@
 [![Build Status][cli-img]][cli-url]
 [![Coverage][cov-img]][cov-url]
 
-**AUI** is a baseline UI available as Mixins, Custom Elements, and React Components, enabling you to build accessible and reusable components in whatever development environment you prefer.
+**AUI** is a baseline UI available as Mixins, Custom Elements, and React Components, enabling you to build components in whatever development environment you prefer.
 
 ## Features
 
-- 🎨 **TypeScript Support**: Full type safety and autocompletion
-- ⚡ **Performance Optimized**: Efficient updates and rendering
-- 🚀 **Zero Dependencies**: Lightweight and framework-agnostic
-- 🎯 **React Exports**: Every custom element is available as a React component
+- 🚀 **Fully Typed**: Full type safety and autocompletion
+- 🧠 **Fully Tested**: Full 100% test coverage
 - 📦 **Tree-shakeable**: Only import what you need
-- 🎨 **Fully Covered**: Full 100% test coverage
+- ⚡ **Performance Optimized**: Efficient updates and rendering
 
 ## Installation
 

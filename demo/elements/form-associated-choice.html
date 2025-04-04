@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Form Associated Choice Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Form Associated Choice Element" />
+		<meta name="description" content="A custom element that provides authors an easily stylable, form-associated choice." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { FormAssociatedChoiceElement } from "./form-associated-choice-element.js"
+			import { OptionElement } from "./option-element.js"
+
+			customElements.define("a-form-associated-choice", FormAssociatedChoiceElement)
+			customElements.define("a-option", OptionElement)
+
+			globalThis.updatePreview = (multiple) => {
+				const code = document.querySelector("pre code")
+
+				code.textContent = `<a-form-associated-choice${multiple ? " multiple" : ""}>\n\t<a-option>Leonardo</a-option>\n\t<a-option selected>Donatello</a-option>\n\t<a-option>Michelangelo</a-option>\n\t<a-option>Raphael</a-option>\n</a-form-associated-choice>`
+			}
+		</script>
+	</head>
+
+	<body>
+		<h1>Form Associated Choice Element</h1>
+		<p>A custom element that provides authors an easily stylable, form-associated choice.</p>
+
+		<h4>Example</h4>
+		<form>
+			<p>
+				<label for="anytp">Pick Any Turtle Power</label>
+				<a-form-associated-choice name="any-turtle-power" id="anytp" multiple>
+					<a-option>Leonardo</a-option>
+					<a-option selected>Donatello</a-option>
+					<a-option>Michelangelo</a-option>
+					<a-option>Raphael</a-option>
+				</a-form-associated-choice>
+			</p>
+			<p>
+				<label for="onetp">Pick One Turtle Power</label>
+				<a-form-associated-choice name="one-turtle-power" id="onetp">
+					<a-option>Leonardo</a-option>
+					<a-option selected>Donatello</a-option>
+					<a-option>Michelangelo</a-option>
+					<a-option>Raphael</a-option>
+				</a-form-associated-choice>
+			</p>
+			<p>
+				<button type="button" onclick="updatePreview(onetp.multiple=!onetp.multiple)">Swap Choice Type</button>
+				<button type="submit">Submit</button>
+			</p>
+		</form>
+
+		<h4>example.html</h4>
+		<pre><code id="code">&lt;a-form-associated-choice&gt;
+	&lt;a-option&gt;Leonardo&lt;/a-option&gt;
+	&lt;a-option selected&gt;Donatello&lt;/a-option&gt;
+	&lt;a-option>Michelangelo&lt;/a-option&gt;
+	&lt;a-option>Raphael&lt;/a-option&gt;
+&lt;/a-form-associated-choice&gt;</code></pre>
+	</body>
+</html>

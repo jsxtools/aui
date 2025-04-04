@@ -18,9 +18,10 @@ const { outputs } = await Bun.build({
 	splitting: true,
 	target: "browser",
 	naming: "[dir]/[name].[ext]",
-	external: ["react", "react-dom"],
+	external: ["react", "react-dom", "vitest"],
 })
 
+// optimize outputs
 for (const output of outputs) {
 	const file = Bun.file(output.path)
 
@@ -37,6 +38,14 @@ for (const output of outputs) {
 	if (originalCode !== modifiedCode) {
 		Bun.write(file, modifiedCode)
 	}
+}
+
+// copy demo files
+for (const demo of await Array.fromAsync(new Glob("demo/**").scan())) {
+	const file = Bun.file(demo)
+	const path = file.name!.replace(/^demo/, "dist")
+
+	await Bun.write(path, file)
 }
 
 await $`tsc --project tsconfig.json`

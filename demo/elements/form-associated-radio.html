@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Radio Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Radio Element" />
+		<meta name="description" content="A custom element that provides children observation support." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { FormAssociatedRadioElement } from "./form-associated-radio-element.js"
+
+			customElements.define("a-form-associated-radio", FormAssociatedRadioElement)
+		</script>
+		<style>
+			a-form-associated-radio {
+				display: inline-flex;
+
+				/* Layout */
+				gap: 0.5em;
+				place-items: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Radio Element</h1>
+		<p>The <strong>Radio</strong> element provides authors an easily stylable, form-associated radio.</p>
+
+		<h4>Example</h4>
+		<form>
+			<p>
+				<label>Good Apples</label>
+				<a-form-associated-radio name="good-apples" checked>Braeburn</a-form-associated-radio>
+				<a-form-associated-radio name="good-apples">Fuji</a-form-associated-radio>
+				<a-form-associated-radio name="good-apples">Gala</a-form-associated-radio>
+			</p>
+			<p>
+				<button type="reset">Reset</button>
+				<button type="submit">Test</button>
+			</p>
+		</form>
+
+		<h4>example.html</h4>
+		<pre><code>&lt;a-form-associated-radio name="good-apples" checked&gt;Braeburn&lt;/a-form-associated-radio&gt;</code></pre>
+	</body>
+</html>

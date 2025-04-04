@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Accordion · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="stylesheet" href="../layout.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="importmap">
+		{
+			"imports": {
+				"context-protocol": "/context-protocol/context.js",
+				"context-protocol/subscriptions": "/context-protocol/subscriptions.js"
+			}
+		}</script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>AUI</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Overview</h3>
+					<ul>
+						<li><a href="#/react/overview/quick-start">Quick start</a></li>
+						<li><a href="#/react/overview/accessibility">Accessibility</a></li>
+						<li><a href="#/react/overview/releases">Releases</a></li>
+						<li><a href="#/react/overview/about">About</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Handbook</h3>
+					<ul>
+						<li><a href="#/react/handbook/styling">Styling</a></li>
+						<li><a href="#/react/handbook/animation">Animation</a></li>
+						<li><a href="#/react/handbook/composition">Composition</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="#/react/components/accordion" aria-current="page">Accordion</a></li>
+						<li><a href="#/react/components/alert-dialog">Alert Dialog</a></li>
+						<li><a href="#/react/components/avatar">Avatar</a></li>
+						<li><a href="#/react/components/checkbox">Checkbox</a></li>
+						<li><a href="#/react/components/checkbox-group">Checkbox Group</a></li>
+						<li><a href="#/react/components/collapsible">Collapsible</a></li>
+						<li><a href="#/react/components/dialog">Dialog</a></li>
+						<li><a href="#/react/components/field">Field</a></li>
+						<li><a href="#/react/components/fieldset">Fieldset</a></li>
+						<li><a href="#/react/components/form">Form</a></li>
+						<li><a href="#/react/components/input">Input</a></li>
+						<li><a href="#/react/components/menu">Menu</a></li>
+						<li><a href="#/react/components/meter">Meter</a></li>
+						<li><a href="#/react/components/number-field">Number Field</a></li>
+						<li><a href="#/react/components/popover">Popover</a></li>
+						<li><a href="#/react/components/preview-card">Preview Card</a></li>
+						<li><a href="#/react/components/progress">Progress</a></li>
+						<li><a href="#/react/components/radio">Radio</a></li>
+						<li><a href="#/react/components/scroll-area">Scroll Area</a></li>
+						<li><a href="#/react/components/select">Select</a></li>
+						<li><a href="#/react/components/separator">Separator</a></li>
+						<li><a href="#/react/components/slider">Slider</a></li>
+						<li><a href="#/react/components/switch">Switch</a></li>
+						<li><a href="#/react/components/tabs">Tabs</a></li>
+						<li><a href="#/react/components/toast">Toast</a></li>
+						<li><a href="#/react/components/toggle">Toggle</a></li>
+						<li><a href="#/react/components/toggle-group">Toggle Group</a></li>
+						<li><a href="#/react/components/toolbar">Toolbar</a></li>
+						<li><a href="#/react/components/tooltip">Tooltip</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Utilities</h3>
+					<ul>
+						<li><a href="#/react/utils/direction-provider">Direction Provider</a></li>
+						<li><a href="#/react/utils/use-render">useRender</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Context Element</h1>
+
+			<div class="playground">
+				<script type="module">
+					import { ContextConsumerElement, ContextProviderElement } from "./context-element.js"
+
+					Object.assign(globalThis, { ContextConsumerElement, ContextProviderElement })
+
+					customElements.define("a-consumer", ContextConsumerElement)
+					customElements.define("a-provider", ContextProviderElement)
+				</script>
+				<div class="preview">
+					<a-provider id="providerElement">
+						<a-consumer id="consumerElement"></a-consumer>
+					</a-provider>
+				</div>
+				<pre class="code"><code></code></pre>
+			</div>
+		</main>
+	</body>
+</html>

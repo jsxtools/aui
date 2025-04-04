@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
-import { FormAssociatedElement } from "../../src/elements/form-associated.ts"
-import { FormAssociatedMixin } from "../../src/mixins/form-associated.ts"
+
+import { FormAssociatedElement } from "../../src/elements/form-associated-element.ts"
+import { FormAssociatedMixin } from "../../src/mixins/form-associated-mixin.ts"
 
 let form: HTMLFormElement
 let element: FormAssociatedElement

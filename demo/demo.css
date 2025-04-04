@@ -1,0 +1,100 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	--color-gray-50: oklch(17% 0.25% 264deg);
+	--color-gray-75: oklch(19% 0.5% 264deg);
+	--color-gray-100: oklch(28% 0.75% 264deg / 65%);
+	--color-gray-200: oklch(29% 0.75% 264deg / 80%);
+	--color-gray-300: oklch(35% 0.75% 264deg / 80%);
+	--color-gray-400: oklch(47% 0.875% 264deg / 80%);
+	--color-gray-500: oklch(64% 1% 264deg / 80%);
+	--color-gray-600: oklch(82% 1% 264deg / 80%);
+	--color-gray-700: oklch(92% 1.125% 264deg / 80%);
+	--color-gray-800: oklch(93% 0.875% 264deg / 85%);
+	--color-gray-900: oklch(95% 0.5% 264deg / 90%);
+	--color-gray-950: oklch(94% 0.375% 264deg / 95%);
+	--color-content: black;
+	--color-background: black;
+	--color-foreground: oklch(90% 2% 264deg);
+	--color-popup: var(--color-gray-50);
+	--color-gridline: oklch(24% 1% 264deg);
+	--color-highlight: oklch(45% 40% 264deg);
+	--color-selection: oklch(50% 50% 264deg / 40%);
+	--color-line-highlight: oklch(50% 50% 264deg / 20%);
+	--color-line-highlight-strong: oklch(50% 50% 264deg / 35%);
+	--color-inline-highlight: oklch(50% 50% 264deg / 35%);
+	--color-gray: var(--color-gray-600);
+	--color-blue: oklch(69% 50% 264deg);
+	--color-green: oklch(75% 25% 150deg);
+	--color-navy: oklch(85% 25% 264deg);
+	--color-purple: oklch(85% 30% 360deg);
+	--color-red: oklch(80% 55% 31deg);
+	--color-violet: oklch(80% 60% 280deg);
+}
+
+html {
+	/* Text */
+	font: 100%/1.5 system-ui;
+	-webkit-font-smoothing: antialiased;
+	tab-size: 4;
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+
+	/* Appearance */
+	-webkit-tap-highlight-color: transparent;
+}
+
+html {
+	display: grid;
+
+	/* Layout */
+	height: 100dvh;
+
+	/* Appearance */
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}
+
+body {
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	/* Layout */
+	margin-block: unset;
+
+	/* Text */
+	font-size: unset;
+	font-weight: unset;
+}
+
+button {
+	display: flex;
+
+	/* Layout */
+	align-items: center;
+	border: none;
+	justify-content: center;
+	height: 2.5rem;
+	padding: 0 .875rem;
+
+	/* Text */
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.5rem;
+
+	/* Appearance */
+	box-shadow: var(--color-gray-200) 0 0 0 1px inset;
+	border-radius: .375rem;
+	background-color: var(--color-gray-50);
+	color: var(--color-gray-900);
+
+	&[data-color="red"] {
+		/* Appearance */
+		color: var(--color-red);
+	}
+}

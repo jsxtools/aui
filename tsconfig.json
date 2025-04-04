@@ -2,6 +2,7 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "ESNext",
+		"moduleResolution": "Node",
 		"lib": [
 			"ESNext",
 			"DOM",
@@ -31,7 +32,6 @@
 		"noFallthroughCasesInSwitch": true,
 		"exactOptionalPropertyTypes": true,
 		"noUncheckedIndexedAccess": true,
-		"moduleResolution": "Node",
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,

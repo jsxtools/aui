@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Drag Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Drag Element" />
+		<meta name="description" content="A custom element with drag support." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { DragElement } from "./drag-element.js"
+
+			customElements.define("a-drag", DragElement)
+		</script>
+		<style>
+			a-drag {
+				display: block;
+				height: 2rem;
+				width: 20rem;
+				border-radius: 0.125rem;
+				box-shadow: inset 0 0 0 1px var(--CanvasText);
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Drag Element</h1>
+		<p>A custom element with drag support.</p>
+		<a-drag draggable="true"></a-drag>
+		<pre><code>&lt;a-drag draggable="true"&gt;&lt;/a-drag&gt;</code></pre>
+	</body>
+</html>

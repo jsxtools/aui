@@ -1,7 +1,8 @@
 import { userEvent } from "@vitest/browser/context"
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
-import { FormAssociatedFileElement } from "../../src/elements/form-associated-file.js"
-import { TransferFile } from "../../src/mixins/file.js"
+
+import { FormAssociatedFileElement } from "../../src/elements/form-associated-file-element.ts"
+import { TransferFile } from "../../src/mixins/file-mixin.ts"
 
 let form: HTMLFormElement
 let element: FormAssociatedFileElement
@@ -15,6 +16,7 @@ beforeAll(() => {
 	element.name = "test-file"
 	element.tabIndex = 0
 	element.textContent = "test"
+	element.multiple = true
 
 	form.appendChild(element)
 
@@ -27,7 +29,7 @@ afterAll(() => {
 
 test("FormAssociatedFileElement has correct default properties", () => {
 	expect(element.maxSize).toBe(Number.POSITIVE_INFINITY)
-	expect(element.multiple).toBe(false)
+	expect(element.multiple).toBe(true)
 	expect(element.files).toEqual([])
 	expect(element.types).toEqual([
 		{
@@ -39,17 +41,19 @@ test("FormAssociatedFileElement has correct default properties", () => {
 	])
 })
 
-test("FormAssociatedFileElement handles multiple attribute", () => {
-	expect(element.multiple).toBe(false)
-
-	element.setAttribute("multiple", "")
+test("FormAssociatedFileElement handles multiple attribute", async () => {
 	expect(element.multiple).toBe(true)
+	expect(element.hasAttribute("multiple")).toBe(true)
 
 	element.removeAttribute("multiple")
+
+	expect(element.hasAttribute("multiple")).toBe(false)
 	expect(element.multiple).toBe(false)
 })
 
 test("FormAssociatedFileElement validates file types", async () => {
+	element.multiple = true
+
 	element.types = [
 		{
 			description: "Images",
@@ -60,27 +64,37 @@ test("FormAssociatedFileElement validates file types", async () => {
 		},
 	]
 
-	const validFile = new File(["test"], "test.png", { type: "image/png" })
-	const invalidFile = new File(["test"], "test.txt", { type: "text/plain" })
-	const invalidFileError = new TransferFile(invalidFile, { valid: false, typeMismatch: true }, "Unsupported file type")
+	const fileOf = {
+		valid: new File(["test"], "test.png", { type: "image/png" }),
+		invalid: new File(["test"], "test.txt", { type: "text/plain" }),
+	}
+
+	const transferOf = {
+		valid: new TransferFile(fileOf.valid),
+		invalid: new TransferFile(fileOf.invalid, { valid: false, typeMismatch: true }, "Unsupported file type"),
+	}
 
 	// Mock drop event with valid file
 	const validDropEvent = new DragEvent("drop", {
 		bubbles: true,
 		dataTransfer: new DataTransfer(),
 	})
-	validDropEvent.dataTransfer!.items.add(validFile)
-	validDropEvent.dataTransfer!.items.add(invalidFile)
+
+	validDropEvent.dataTransfer!.items.add(fileOf.valid)
+	validDropEvent.dataTransfer!.items.add(fileOf.invalid)
 
 	const inputEventSpy = vi.fn()
 	const changeEventSpy = vi.fn()
+
 	element.addEventListener("input", inputEventSpy)
 	element.addEventListener("change", changeEventSpy)
 
 	element.dispatchEvent(validDropEvent)
 
-	expect(element.files).toEqual([new TransferFile(validFile), invalidFileError])
+	expect(element.multiple).toBe(true)
+	expect(element.files).toEqual([transferOf.valid, transferOf.invalid])
 	expect(element.validity.valid).toBe(true)
+
 	expect(inputEventSpy).toHaveBeenCalled()
 	expect(changeEventSpy).toHaveBeenCalled()
 
@@ -89,11 +103,12 @@ test("FormAssociatedFileElement validates file types", async () => {
 		bubbles: true,
 		dataTransfer: new DataTransfer(),
 	})
-	invalidDropEvent.dataTransfer!.items.add(invalidFile)
+
+	invalidDropEvent.dataTransfer!.items.add(fileOf.invalid)
 
 	element.dispatchEvent(invalidDropEvent)
 
-	expect(element.files).toEqual([new TransferFile(invalidFile, { valid: false, typeMismatch: true }, "Unsupported file type")])
+	expect(element.files).toEqual([transferOf.invalid])
 	expect(element.validity.typeMismatch).toBe(true)
 	expect(element.validationMessage).toBe("Unsupported file type")
 })
@@ -176,11 +191,13 @@ test("FormAssociatedFileElement detects files with missing types", () => {
 test("FormAssociatedFileElement handles click", async () => {
 	const file = new File(["test"], "test.txt", { type: "text/plain" })
 	const { showOpenFilePicker } = globalThis
-	const fakeFilePicker = (globalThis.showOpenFilePicker = vi.fn().mockResolvedValue([
+	const fakeFilePicker = vi.fn().mockResolvedValue([
 		{
 			getFile: vi.fn().mockResolvedValue(file),
 		},
-	]))
+	])
+
+	globalThis.showOpenFilePicker = fakeFilePicker
 
 	await userEvent.click(element)
 

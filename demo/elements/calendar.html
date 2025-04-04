@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Calendar · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar" aria-current="page">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Calendar</h1>
+			<p>A stylable, accessible, keyboard-navigable calendar interface.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { CalendarElement } from "./calendar-element.js"
+
+					customElements.define("a-calendar", CalendarElement)
+				</script>
+				<style>
+					a-calendar {
+						display: inline-block;
+
+						&:not(:defined) {
+							/* Layout */
+							height: 15.25rem;
+						}
+
+						&::part(button) {
+							/* Appearance */
+							border-radius: 0.25rem;
+							cursor: pointer;
+						}
+
+						&::part(button):hover {
+							/* Appearance */
+							background-color: var(--color-gray-200);
+						}
+
+						&::part(day) {
+							border-radius: 0.25rem;
+						}
+
+						&::part(day):hover {
+							background-color: var(--color-gray-100);
+						}
+
+						&::part(day):active,
+						&::part(day selected),
+						&::part(day selected):hover {
+							background-color: var(--color-blue);
+							color: var(--color-gray-50);
+						}
+
+						&::part(day disabled) {
+							display: none;
+						}
+					}
+				</style>
+				<div class="preview">
+					<div style="display: flex; gap: 20px;">
+						<a-calendar></a-calendar>
+					</div>
+				</div>
+				<pre class="code"><code>&lt;a-calendar>&lt;/a-calendar&gt;
+
+&lt;script&gt;
+import { CalendarElement } from "@jsxtools/aui/elements/calendar"
+
+customElements.define("a-calendar", CalendarElement)
+&lt;/script&gt;</code></pre>
+			</div>
+
+			<section class="page-section">
+				<h2>CSS Parts</h2>
+				<p>
+					CSS parts allow for fine-grained styling and theming. They target specific elements inside the component. An element may have multiple parts, and a part may be
+					used on multiple
+					elements.
+				</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>header</code></td>
+							<td>The section that contains the heading, back, and next buttons</td>
+						</tr>
+						<tr>
+							<td><code>heading</code></td>
+							<td>The heading that labels the month</td>
+						</tr>
+						<tr>
+							<td><code>grid</code></td>
+							<td>The grid containing all the days in a month</td>
+						</tr>
+						<tr>
+							<td><code>day</code></td>
+							<td>A day within a month.</td>
+						</tr>
+						<tr>
+							<td><code>cell</code></td>
+							<td>A cell containing the day</td>
+						</tr>
+						<tr>
+							<td><code>focused</code></td>
+							<td>A day that has been focused</td>
+						</tr>
+						<tr>
+							<td><code>selected</code></td>
+							<td>A day that has been selected</td>
+						</tr>
+						<tr>
+							<td><code>disabled</code></td>
+							<td>A day outside the range of the visible month</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	/* Text */
+	font: 100%/1.5 system-ui;
+	-webkit-font-smoothing: antialiased;
+	tab-size: 4;
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+
+	/* Appearance */
+	-webkit-tap-highlight-color: transparent;
+}
+
+html {
+	display: grid;
+
+	/* Layout */
+	height: 100dvh;
+
+	/* Appearance */
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}
+
+body {
+	margin: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}

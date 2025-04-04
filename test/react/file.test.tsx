@@ -1,12 +1,13 @@
 /// <reference types="@vitest/browser/matchers" />
 
-import type { FileElement } from "../../src/elements/file.js"
+import type { FileElement } from "../../src/elements/file-element.ts"
 
 import * as React from "react"
 
 import { expect, test, vi } from "vitest"
 import { render } from "vitest-browser-react"
-import { FileComponent } from "../../src/react/file.js"
+
+import { FileComponent } from "../../src/react/file-component.ts"
 
 test("renders FileComponent with children", async () => {
 	const testContent = "Test Content"

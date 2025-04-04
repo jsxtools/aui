@@ -1,16 +1,24 @@
-export const customElements: CustomElementRegistry = globalThis.customElements || { define() {} }
+export const $create = <K extends keyof HTMLElementTagNameMap>(name: K, ...parts: (Node | string | ElementPropsOf<HTMLElementTagNameMap[K]>)[]): HTMLElementTagNameMap[K] =>
+	$assign(document.createElement(name), ...parts)
 
-export const HTMLElement: CustomElementConstructor = globalThis.HTMLElement || class {}
+export const $assign = <T extends HTMLElement>(element: T, ...parts: (Node | string | ElementPropsOf<T>)[]): T => (
+	element.append(
+		// @ts-ignore: filter returning nothing is an implicit false
+		...parts.filter((part) => {
+			if (part !== Object(part) || part instanceof Node) {
+				if (part) {
+					return true
+				}
+			}
 
-export interface CustomElement extends HTMLElement {
-	attributeChangedCallback?(name: string, oldValue: string | null, newValue: string | null): void
-	connectedCallback?(): void
-	disconnectedCallback?(): void
-}
+			Object.assign(element, part)
+		}),
+	),
+	element
+)
 
-export interface CustomElementConstructor<T = CustomElement> {
-	new (...args: any[]): globalThis.HTMLElement & T
-
-	observedAttributes?: string[]
-	formAssociated?: boolean
+export type ElementPropsOf<T> = {
+	[K in `on${keyof HTMLElementEventMap}`]?: K extends `on${infer EventName extends keyof HTMLElementEventMap}` ? (this: T, event: HTMLElementEventMap[EventName]) => void : never
+} & {
+	[K in keyof T]?: unknown
 }

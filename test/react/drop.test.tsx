@@ -4,7 +4,8 @@ import * as React from "react"
 
 import { expect, test, vi } from "vitest"
 import { render } from "vitest-browser-react"
-import { DropComponent } from "../../src/react/drop.js"
+
+import { DropComponent } from "../../src/react/drop-component.ts"
 
 test("renders DropComponent with children", async () => {
 	const testContent = "Test Content"

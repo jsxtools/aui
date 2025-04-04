@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Accordion · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion" aria-current="page">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Accordion</h1>
+			<p>A set of collapsible panels with headings.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { AccordionElement } from "./accordion-element.js"
+
+					customElements.define("a-accordion", AccordionElement)
+				</script>
+				<style>
+					a-accordion {
+						&::part(disclosure) {
+							display: block;
+							box-shadow: oklch(29% 0.75% 264deg/80%) 0 -1px inset;
+						}
+
+						&::part(panel) {
+							display: block;
+							overflow: clip;
+							transition: height 150ms ease-out;
+						}
+
+						&::part(panel closed) {
+							height: 0;
+						}
+
+						&::part(panel open) {
+							height: auto;
+							height: calc-size(auto, size);
+						}
+
+						& h3 {
+							/* Layout */
+							margin-block: 0;
+							padding-block: 0.5em;
+							/* Appearance */
+							cursor: pointer;
+							/* Behavior */
+							-webkit-user-select: none;
+							user-select: none;
+						}
+
+						& p {
+							/* Layout */
+							margin-block: 0;
+							padding-block-end: 0.75em;
+						}
+
+						&:is(:not(:defined))> :not(h3) {
+							display: none;
+						}
+					}
+				</style>
+				<div class="preview">
+					<a-accordion>
+						<h3>Ingredients</h3>
+						<p>A list of ingredients.</p>
+
+						<h3>Instructions</h3>
+						<p>A list of instructions.</p>
+
+						<h3>Additional information</h3>
+						<p>A list of additional information.</p>
+					</a-accordion>
+				</div>
+				<pre class="code"><code>&lt;a-accordion&gt;
+	&lt;h3&gt;Ingredients&lt;/h3&gt;
+	&lt;p&gt;A list of ingredients.&lt;/p&gt;
+
+	&lt;h3&gt;Instructions&lt;/h3&gt;
+	&lt;p&gt;A list of instructions.&lt;/p&gt;
+
+	&lt;h3&gt;Additional information&lt;/h3&gt;
+	&lt;p&gt;A list of additional information.&lt;/p&gt;
+&lt;/a-accordion&gt;
+
+&lt;script&gt;
+import { AccordionElement } from "@jsxtools/aui/elements/accordion"
+
+customElements.define("a-accordion", AccordionElement)
+&lt;/script&gt;</code></pre>
+			</div>
+
+			<section class="page-section">
+				<h2>CSS Parts</h2>
+				<p>
+					CSS parts allow for fine-grained styling and theming. They target specific elements inside the component. An element may have multiple parts, and a part may be
+					used on multiple
+					elements.
+				</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>disclosure</code></td>
+							<td>A group within the accordion</td>
+						</tr>
+						<tr>
+							<td><code>title</code></td>
+							<td>The title area of a group</td>
+						</tr>
+						<tr>
+							<td><code>panel</code></td>
+							<td>The content of a group</td>
+						</tr>
+						<tr>
+							<td><code>open</code></td>
+							<td>A modifier when a disclosure or title is open</td>
+						</tr>
+						<tr>
+							<td><code>closed</code></td>
+							<td>A modifier when a disclosure or title is closed</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</main>
+	</body>
+</html>

@@ -4,7 +4,8 @@ import * as React from "react"
 
 import { expect, test, vi } from "vitest"
 import { render } from "vitest-browser-react"
-import { DragComponent } from "../../src/react/drag.js"
+
+import { DragComponent } from "../../src/react/drag-component.ts"
 
 test("renders DragComponent with children", async () => {
 	const testContent = "Test Content"

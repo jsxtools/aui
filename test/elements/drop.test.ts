@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
-import { DropElement } from "../../src/elements/drop.js"
-import { DropMixin } from "../../src/mixins/drop.js"
+
+import { DropElement } from "../../src/elements/drop-element.ts"
+import { DropMixin } from "../../src/mixins/drop-mixin.ts"
 
 let element: DropElement
 

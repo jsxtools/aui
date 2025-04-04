@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Avatar · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar" aria-current="page">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Avatar</h1>
+			<p>An easily stylable avatar component.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { AvatarElement } from "./avatar-element.js"
+
+					customElements.define("a-avatar", AvatarElement)
+				</script>
+				<style>
+					a-avatar {
+						display: inline-flex;
+						/* Layout */
+						aspect-ratio: 1;
+						place-content: center;
+						place-items: center;
+						width: 4rem;
+						/* Text */
+						font-weight: 500;
+						/* Appearance */
+						background-color: oklch(28% 0.75% 264deg/65%);
+						border-radius: calc(infinity * 1px);
+						color: oklch(95% 0.5% 264deg/90%);
+						outline: 1px solid rgb(0 0 0/5%);
+						outline-offset: -1px;
+					}
+				</style>
+				<div class="preview">
+					<div style="display: flex; gap: 20px;">
+						<a-avatar src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=128&h=128&dpr=2&q=80">LT</a-avatar>
+						<a-avatar>LT</a-avatar>
+					</div>
+				</div>
+				<pre class="code"><code>&lt;a-avatar src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=128&h=128&dpr=2&q=80">LT&lt;/a-avatar&gt;
+&lt;a-avatar>LT&lt;/a-avatar&gt;
+
+&lt;script&gt;
+import { AvatarElement } from "@jsxtools/aui/elements/avatar"
+
+customElements.define("a-avatar", AvatarElement)
+&lt;/script&gt;</code></pre>
+			</div>
+		</main>
+	</body>
+</html>

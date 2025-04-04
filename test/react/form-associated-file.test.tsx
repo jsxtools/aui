@@ -1,12 +1,13 @@
 /// <reference types="@vitest/browser/matchers" />
 
-import type { FormAssociatedFileElement } from "../../src/elements/form-associated-file.js"
+import type { FormAssociatedFileElement } from "../../src/elements/form-associated-file-element.ts"
 
 import * as React from "react"
 
 import { expect, test, vi } from "vitest"
 import { render } from "vitest-browser-react"
-import { FormAssociatedFileComponent } from "../../src/react/form-associated-file.js"
+
+import { FormAssociatedFileComponent } from "../../src/react/form-associated-file-component.ts"
 
 test("renders FormAssociatedFileComponent with children", async () => {
 	const testContent = "Test Content"

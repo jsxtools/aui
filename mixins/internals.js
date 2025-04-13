@@ -1,0 +1,1 @@
+var InternalsMixin=(Element)=>class extends Element{internals=super.attachInternals();attachInternals(){return this.internals}};export{InternalsMixin}

@@ -1,0 +1,1 @@
+import{FormAssociatedTimeMixin}from"../mixins/form-associated-time.js";import{HTMLElement}from"../api/dom.js";class FormAssociatedTimeElement extends FormAssociatedTimeMixin(HTMLElement){}export{FormAssociatedTimeElement}

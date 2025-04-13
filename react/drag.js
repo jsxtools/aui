@@ -1,0 +1,1 @@
+import{DragElement}from"../elements/drag.js";import{customElements}from"../api/dom.js";import{createElement}from"react";customElements.define("a-drag",DragElement);var DragComponent=(props)=>createElement("a-drag",props);export{DragComponent}

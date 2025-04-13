@@ -1,0 +1,1 @@
+import{FormAssociatedMixin}from"../mixins/form-associated.js";import{HTMLElement}from"../api/dom.js";class FormAssociatedElement extends FormAssociatedMixin(HTMLElement){}export{FormAssociatedElement}

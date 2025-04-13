@@ -1,0 +1,1 @@
+var CSSStyleSheet=globalThis.CSSStyleSheet||class{replaceSync(){}};export{CSSStyleSheet}

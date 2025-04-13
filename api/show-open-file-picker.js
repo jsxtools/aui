@@ -1,0 +1,1 @@
+var{showOpenFilePicker}=globalThis;export{showOpenFilePicker}

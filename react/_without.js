@@ -1,0 +1,1 @@
+var without=({...props},...without2)=>{for(let name of without2)delete props[name];return props};export{without}

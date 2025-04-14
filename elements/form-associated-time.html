@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-<title>Form Associated Time Element: AUI</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
-<meta name="og:title" content="Form Associated Time Element" />
-<meta name="description" content="A custom element with an interface to manipulate time values with form association. />
-<meta property="og:type" content="website" />
-<script type="module">
-import{FormAssociatedTimeElement}from"./form-associated-time.js"
-customElements.define("a-form-associated-time",FormAssociatedTimeElement)
-</script>
-</head>
-<body>
-<h1>Form Associated Time Element</h1>
-<p>A custom element with an interface to manipulate time values with form association.</p>
-<a-form-associated-time></a-form-associated-time>
-<pre><code>&lt;a-form-associated-time&gt;&lt;/a-form-associated-time&gt;</code></pre>
-</body>
+	<head>
+		<title>Form Associated Time Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Form Associated Time Element" />
+		<meta name="description" content="A custom element with an interface to manipulate time values with form association." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { FormAssociatedTimeElement } from "./form-associated-time.js"
+
+			customElements.define("a-form-associated-time", FormAssociatedTimeElement)
+		</script>
+		<style>
+			a-form-associated-time {
+				display: block;
+				height: 1em;
+				width: fit-content;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Form Associated Time Element</h1>
+		<p>A custom element with an interface to manipulate time values with form association.</p>
+		<a-form-associated-time></a-form-associated-time>
+		<pre><code>&lt;a-form-associated-time&gt;&lt;/a-form-associated-time&gt;</code></pre>
+	</body>
 </html>

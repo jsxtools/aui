@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-<title>Internals Element: AUI</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
-<meta name="og:title" content="Internals Element" />
-<meta name="description" content="A custom element that provides the ElementInternals API. />
-<meta property="og:type" content="website" />
-<script type="module">
-import{InternalsElement}from"./internals.js"
-customElements.define("a-internals",InternalsElement)
-</script>
-</head>
-<body>
-<h1>Internals Element</h1>
-<p>A custom element that provides the ElementInternals API.</p>
-<a-internals></a-internals>
-<pre><code>&lt;a-internals&gt;&lt;/a-internals&gt;</code></pre>
-</body>
+	<head>
+		<title>Internals Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Internals Element" />
+		<meta name="description" content="A custom element that exposes the ElementInternals API." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { InternalsElement } from "./internals.js"
+
+			customElements.define("a-internals", InternalsElement)
+		</script>
+	</head>
+
+	<body>
+		<h1>Internals Element</h1>
+		<p>A custom element that exposes the ElementInternals API.</p>
+		<a-internals></a-internals>
+		<pre><code>&lt;a-internals&gt;&lt;/a-internals&gt;</code></pre>
+	</body>
 </html>

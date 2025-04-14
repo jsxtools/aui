@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-<title>Click Element: AUI</title>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
-<meta name="og:title" content="Click Element" />
-<meta name="description" content="A custom element with keyboard-accessible click support. />
-<meta property="og:type" content="website" />
-<script type="module">
-import{ClickElement}from"./click.js"
-customElements.define("a-click",ClickElement)
-</script>
-</head>
-<body>
-<h1>Click Element</h1>
-<p>A custom element with keyboard-accessible click support.</p>
-<a-click></a-click>
-<pre><code>&lt;a-click&gt;&lt;/a-click&gt;</code></pre>
-</body>
+	<head>
+		<title>Click Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Click Element" />
+		<meta name="description" content="A custom element with drop support." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { ClickElement } from "./click.js"
+
+			customElements.define("a-click", ClickElement)
+		</script>
+		<style>
+			a-click {
+				display: block;
+				height: 150px;
+				width: 300px;
+				border-radius: 0.125rem;
+
+				&:not(:focus-visible) {
+					outline: 1px solid var(--CanvasText);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Click Element</h1>
+		<p>A custom element with drop support.</p>
+		<a-click tabindex="0"></a-click>
+		<pre><code>&lt;a-click tabindex="0"&gt;&lt;/a-click&gt;</code></pre>
+	</body>
 </html>

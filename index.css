@@ -1,0 +1,40 @@
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
+
+	:root {
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+
+		--Canvas: #ffffff;
+		--CanvasText: #353841;
+		--AccentText: #0065da;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--Canvas: color(srgb 0.08 0.08 0.10);
+			--CanvasText: color(srgb 0.78 0.79 0.80);
+			--AccentText: #60a5fa;
+		}
+	}
+
+	html {
+		font: 100%/1.5 system-ui;
+		background-color: var(--Canvas);
+		color: var(--CanvasText);
+		color-scheme: light dark;
+	}
+
+	body {
+		margin: 0;
+		padding-inline: max(1rem, 50% - 27rem);
+	}
+
+	a[href] {
+		color: var(--AccentText);
+	}
+}

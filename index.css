@@ -5,6 +5,7 @@
 
 	:root {
 		-webkit-font-smoothing: antialiased;
+		tab-size: 4;
 		text-rendering: optimizeLegibility;
 		-webkit-text-size-adjust: 100%;
 		text-size-adjust: 100%;
@@ -37,5 +38,12 @@
 	a[href]:not([class]) {
 		color: var(--AccentText);
 		text-underline-offset: 0.125em;
+	}
+
+	h4:has(+ pre) {
+		/* Layout */
+		margin-block: 3rem 0;
+		/* Text */
+		font-size: 1rem;
 	}
 }

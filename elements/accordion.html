@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Accordion Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Accordion Element" />
+		<meta name="description" content="A custom element that provides collapsible sections by headings." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { AccordionElement } from "./accordion.js"
+
+			customElements.define("a-accordion", AccordionElement)
+		</script>
+		<style>
+			a-accordion {
+				&::part(disclosure) {
+					display: block;
+					box-shadow: oklch(29% 0.75% 264deg/80%) 0 -1px inset;
+				}
+
+				&::part(panel closed) {
+					display: none;
+				}
+
+				&::part(panel open) {
+					display: block;
+				}
+
+				& h3 {
+					/* Layout */
+					margin-block: 0;
+					padding-block: 0.5em;
+					/* Appearance */
+					cursor: pointer;
+					/* Behavior */
+					-webkit-user-select: none;
+					user-select: none;
+				}
+
+				& p {
+					/* Layout */
+					margin-block: 0;
+					padding-block-end: 0.75em;
+				}
+
+				&:is(:not(:defined))> :not(h3) {
+					display: none;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Accordion Element</h1>
+		<p>A custom element that provides collapsible sections by headings.</p>
+		<a-accordion>
+			<h3>Ingredients</h3>
+			<p>A list of ingredients.</p>
+
+			<h3>Instructions</h3>
+			<p>A list of instructions.</p>
+
+			<h3>Additional information</h3>
+			<p>A list of additional information.</p>
+		</a-accordion>
+
+		<h4>example.html</h4>
+		<pre><code>&lt;a-accordion&gt;
+	&lt;h3&gt;Ingredients&lt;/h3&gt;
+	&lt;p&gt;A list of ingredients.&lt;/p&gt;
+
+	&lt;h3&gt;Instructions&lt;/h3&gt;
+	&lt;p&gt;A list of instructions.&lt;/p&gt;
+
+	&lt;h3&gt;Additional information&lt;/h3&gt;
+	&lt;p&gt;A list of additional information.&lt;/p&gt;
+&lt;/a-accordion&gt;</code></pre>
+
+		<h4>example.js</h4>
+		<pre><code>import { AccordionElement } from "https://cdn.jsdelivr.net/npm/@jsxtools/aui/dist/elements/accordion.js"
+
+customElements.define("a-accordion", AccordionElement)
+		</code></pre>
+	</body>
+</html>

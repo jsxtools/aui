@@ -1,0 +1,1 @@
+import{AccordionMixin}from"../mixins/accordion.js";import{HTMLElement}from"../api/html-element.js";class AccordionElement extends AccordionMixin(HTMLElement){}export{AccordionElement}

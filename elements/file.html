@@ -29,6 +29,14 @@
 		<h1>File Element</h1>
 		<p>A custom element with file-drop and file-picker support.</p>
 		<a-file tabindex="0"></a-file>
-		<pre><code>&lt;a-file&gt;&lt;/a-file&gt;</code></pre>
+
+		<h4>example.html</h4>
+		<pre><code>&lt;a-file tabindex="0"&gt;&lt;/a-file&gt;</code></pre>
+
+		<h4>example.js</h4>
+		<pre><code>import { FileElement } from "https://cdn.jsdelivr.net/npm/@jsxtools/aui/dist/elements/file.js"
+
+customElements.define("a-file", FileElement)
+		</code></pre>
 	</body>
 </html>

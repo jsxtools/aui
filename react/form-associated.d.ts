@@ -1,4 +1,5 @@
 import { FormAssociatedElement } from "../elements/form-associated.ts";
+/** A component with form association and validation support. */
 export declare const FormAssociatedComponent: ({ ref, ...props }: FormAssociatedComponent.Props) => import("react").DOMElement<{
     ref: (current: FormAssociatedElement | null) => void;
     key?: import("react").Key | null | undefined;

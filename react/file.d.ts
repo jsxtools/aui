@@ -1,5 +1,6 @@
-import type { FilePickerAcceptType } from "../api.ts";
+import type { FilePickerAcceptType } from "../api/show-open-file-picker.ts";
 import { FileElement, TransferFile } from "../elements/file.ts";
+/** A component with file-drop and file-picker support. */
 export declare const FileComponent: ({ ref, ...props }: FileComponent.Props) => import("react").DOMElement<{
     ref: (current: FileElement | null) => void;
     key?: import("react").Key | null | undefined;

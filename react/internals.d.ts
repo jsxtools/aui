@@ -1,4 +1,5 @@
 import { InternalsElement } from "../elements/internals.ts";
+/** A component that provides the ElementInternals API. */
 export declare const InternalsComponent: (props: InternalsComponent.Props) => import("react").DOMElement<InternalsComponent.Props, InternalsElement>;
 export declare namespace InternalsComponent {
     type Element = InternalsElement;

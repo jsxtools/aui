@@ -1,5 +1,6 @@
 import type { FilePickerAcceptType } from "../api.ts";
 import { FormAssociatedFileElement } from "../elements/form-associated-file.ts";
+/** A component with file-drop & file-picker support, and form association & validation. */
 export declare const FormAssociatedFileComponent: ({ ref, ...props }: FormAssociatedFileComponent.Props) => import("react").DOMElement<{
     ref: (current: FormAssociatedFileElement | null) => void;
     key?: import("react").Key | null | undefined;

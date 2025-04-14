@@ -1,4 +1,5 @@
 import { ClickElement } from "../elements/click.ts";
+/** A component with keyboard-accessible click support. */
 export declare const ClickComponent: (props: ClickComponent.Props) => import("react").DOMElement<ClickComponent.Props, ClickElement>;
 export declare namespace ClickComponent {
     type Element = ClickElement;

@@ -1,4 +1,5 @@
 import { DragElement } from "../elements/drag.ts";
+/** A component with drag support. */
 export declare const DragComponent: (props: DragComponent.Props) => import("react").DOMElement<DragComponent.Props, DragElement>;
 export declare namespace DragComponent {
     type Element = DragElement;

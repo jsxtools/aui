@@ -1,4 +1,5 @@
 import { DropElement } from "../elements/drop.ts";
+/** A component with drop support. */
 export declare const DropComponent: (props: DropComponent.Props) => import("react").DOMElement<DropComponent.Props, DropElement>;
 export declare namespace DropComponent {
     type Element = DropElement;

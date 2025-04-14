@@ -9,16 +9,16 @@
 		-webkit-text-size-adjust: 100%;
 		text-size-adjust: 100%;
 
-		--Canvas: #ffffff;
-		--CanvasText: #353841;
-		--AccentText: #0065da;
+		--Canvas: color(srgb 1 1 1);
+		--CanvasText: color(srgb 0.21 0.22 0.25);
+		--AccentText: color(srgb 0.1 0.4 0.7);
 	}
 
 	@media (prefers-color-scheme: dark) {
 		:root {
 			--Canvas: color(srgb 0.08 0.08 0.10);
 			--CanvasText: color(srgb 0.78 0.79 0.80);
-			--AccentText: #60a5fa;
+			--AccentText: color(srgb 0.40 0.65 0.95);
 		}
 	}
 
@@ -34,7 +34,8 @@
 		padding-inline: max(1rem, 50% - 27rem);
 	}
 
-	a[href] {
+	a[href]:not([class]) {
 		color: var(--AccentText);
+		text-underline-offset: 0.125em;
 	}
 }

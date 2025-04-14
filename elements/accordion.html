@@ -21,12 +21,19 @@
 					box-shadow: oklch(29% 0.75% 264deg/80%) 0 -1px inset;
 				}
 
+				&::part(panel) {
+					display: block;
+					overflow: clip;
+					transition: height 150ms ease-out;
+				}
+
 				&::part(panel closed) {
-					display: none;
+					height: 0;
 				}
 
 				&::part(panel open) {
-					display: block;
+					height: auto;
+					height: calc-size(auto, size);
 				}
 
 				& h3 {

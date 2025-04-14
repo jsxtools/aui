@@ -4,6 +4,10 @@
 	}
 
 	:root {
+		/* Appearance */
+		interpolate-size: allow-keywords;
+
+		/* Text */
 		-webkit-font-smoothing: antialiased;
 		tab-size: 4;
 		text-rendering: optimizeLegibility;

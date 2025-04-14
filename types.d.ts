@@ -30,6 +30,10 @@ export interface CustomElementConstructor<T = CustomElement> {
 }
 /** Provides methods for registering custom elements and querying registered elements. [MDN Reference](https://developer.mozilla.org/docs/Web/API/CustomElementRegistry) */
 export declare class CustomElementRegistry {
+    /** List of attributes to observe for changes, invoking `attributeChangedCallback`. */
+    static observedAttributes?: string[];
+    /** Indicates whether the custom element participates in form submission. */
+    static formAssociated?: boolean;
     /** Adds a definition for a custom element to the custom element registry. [MDN Reference](https://developer.mozilla.org/docs/Web/API/CustomElementRegistry/define) */
     define(name: string, constructor: CustomElementConstructor, options?: ElementDefinitionOptions): void;
     /** Returns the constructor for a previously-defined custom element. [MDN Reference](https://developer.mozilla.org/docs/Web/API/CustomElementRegistry/get) */

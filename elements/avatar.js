@@ -1,0 +1,1 @@
+import{AvatarMixin}from"../mixins/avatar.js";import{HTMLElement}from"../api/html-element.js";class AvatarElement extends AvatarMixin(HTMLElement){}export{AvatarElement}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Checkbox Element: AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="Checkbox Element" />
+		<meta name="description" content="A custom element that provides children observation support." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script type="module">
+			import { FormAssociatedCheckboxElement } from "./checkbox.js"
+
+			customElements.define("a-form-associated-checkbox", FormAssociatedCheckboxElement)
+
+			// for (const element of document.querySelectorAll("a-form-associated-checkbox")) {
+			// 	console.log(element.checked)
+			// }
+		</script>
+		<style>
+			a-form-associated-checkbox {
+				display: inline-flex;
+
+				/* Layout */
+				gap: 0.25em;
+				place-items: center;
+
+				&::part(indicator) {
+					display: inline-flex;
+
+					/* Layout */
+					padding: 0.25em;
+
+					/* Appearance */
+					background-color: var(--Accent);
+					border-radius: 0.125em;
+					color: transparent;
+					transition: color 150ms ease-in-out, scale 300ms ease-out;
+				}
+
+				&:hover::part(indicator) {
+					--Accent: #ffffff;
+					scale: 1.05;
+				}
+
+				&:state(checked)::part(indicator) {
+					color: var(--Canvas);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Checkbox Element</h1>
+		<p>The <strong>Checkbox</strong> element provides authors an easily stylable, form-associated checkbox.</p>
+
+		<h4>Example</h4>
+		<form method="GET">
+			<p>
+				<a-form-associated-checkbox name="notify">Enable notifications</a-form-associated-checkbox>
+			</p>
+			<p>
+				<button type="reset">Reset</button>
+				<button type="submit">Test</button>
+			</p>
+		</form>
+
+		<h4>example.html</h4>
+		<pre><code>&lt;a-form-associated-checkbox name="notify"&gt;Enable notifications&lt;/a-form-associated-checkbox&gt;</code></pre>
+
+		<hr />
+
+		<h4>Example: Required Checkbox</h4>
+		<form method="GET">
+			<p>
+				<a-form-associated-checkbox name="agree" required checked>Agree</a-form-associated-checkbox>
+			</p>
+			<p>
+				<button type="reset">Reset</button>
+				<button type="submit">Test</button>
+			</p>
+		</form>
+
+		<h4>example.html</h4>
+		<pre><code>&lt;a-form-associated-checkbox name="agree" required checked&gt;Agree&lt;/a-form-associated-checkbox&gt;</code></pre>
+	</body>
+</html>

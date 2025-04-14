@@ -1,0 +1,1 @@
+import{FormAssociatedCheckboxMixin}from"../mixins/checkbox.js";import{HTMLElement}from"../api/html-element.js";class FormAssociatedCheckboxElement extends FormAssociatedCheckboxMixin(HTMLElement){}export{FormAssociatedCheckboxElement}

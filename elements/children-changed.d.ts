@@ -1,6 +1,6 @@
 import { ChildrenChangedMixin } from "../mixins/children-changed.ts";
-declare const ChildrenChangedElement_base: import("../api/dom.ts").CustomElementConstructor<import("../api/dom.ts").CustomElement> & ChildrenChangedMixin.Constructor;
-/** A Custom Element with keyboard-accessible click support. */
+declare const ChildrenChangedElement_base: import("../types.ts").CustomElementConstructor<import("../types.ts").CustomElement> & ChildrenChangedMixin.Constructor;
+/** A custom element that provides children observation support. */
 export declare class ChildrenChangedElement extends ChildrenChangedElement_base {
 }
 export declare namespace ChildrenChangedElement {

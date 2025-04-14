@@ -1,1 +1,1 @@
-import{ClickMixin}from"../mixins/click.js";import{HTMLElement}from"../api/dom.js";class ClickElement extends ClickMixin(HTMLElement){}export{ClickElement}
+import{ClickMixin}from"../mixins/click.js";import{HTMLElement}from"../api/html-element.js";class ClickElement extends ClickMixin(HTMLElement){}export{ClickElement}

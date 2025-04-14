@@ -1,5 +1,5 @@
 import { FormAssociatedMixin } from "../mixins/form-associated.ts";
-declare const FormAssociatedElement_base: import("../api/dom.ts").CustomElementConstructor<import("../api/dom.ts").CustomElement> & FormAssociatedMixin.Constructor;
+declare const FormAssociatedElement_base: import("../types.ts").CustomElementConstructor<import("../types.ts").CustomElement> & FormAssociatedMixin.Constructor;
 /** A custom element with form association and validation support. */
 export declare class FormAssociatedElement extends FormAssociatedElement_base {
 }

@@ -1,1 +1,1 @@
-import{DragMixin}from"../mixins/drag.js";import{HTMLElement}from"../api/dom.js";class DragElement extends DragMixin(HTMLElement){}export{DragElement}
+import{DragMixin}from"../mixins/drag.js";import{HTMLElement}from"../api/html-element.js";class DragElement extends DragMixin(HTMLElement){}export{DragElement}

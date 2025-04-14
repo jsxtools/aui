@@ -1,5 +1,5 @@
-import type { CustomElementConstructor } from "../api/dom.ts";
 import type { FilePickerAcceptType } from "../api/show-open-file-picker.ts";
+import type { CustomElementConstructor } from "../types.ts";
 import { DropMixin } from "./drop.ts";
 /** A mixin to provide file drop and file picker support to a custom element. */
 export declare const FileMixin: <T extends CustomElementConstructor>(Element: T) => T & FileMixin.Constructor;

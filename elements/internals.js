@@ -1,1 +1,1 @@
-import{InternalsMixin}from"../mixins/internals.js";import{HTMLElement}from"../api/dom.js";class InternalsElement extends InternalsMixin(HTMLElement){}export{InternalsElement}
+import{InternalsMixin}from"../mixins/internals.js";import{HTMLElement}from"../api/html-element.js";class InternalsElement extends InternalsMixin(HTMLElement){}export{InternalsElement}

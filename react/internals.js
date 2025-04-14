@@ -1,1 +1,1 @@
-import{InternalsElement}from"../elements/internals.js";import{customElements}from"../api/dom.js";import{createElement}from"react";customElements.define("a-internals",InternalsElement);var InternalsComponent=(props)=>createElement("a-internals",props);export{InternalsComponent}
+import{InternalsElement}from"../elements/internals.js";import{customElements}from"../api/custom-elements.js";import{createElement}from"react";customElements.define("a-internals",InternalsElement);var InternalsComponent=(props)=>createElement("a-internals",props);export{InternalsComponent}

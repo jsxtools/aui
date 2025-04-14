@@ -1,5 +1,5 @@
 import { DropMixin } from "../mixins/drop.ts";
-declare const DropElement_base: import("../api/dom.ts").CustomElementConstructor<import("../api/dom.ts").CustomElement> & DropMixin.Constructor;
+declare const DropElement_base: import("../types.ts").CustomElementConstructor<import("../types.ts").CustomElement> & DropMixin.Constructor;
 /** A custom element with drop support. */
 export declare class DropElement extends DropElement_base {
 }

@@ -1,1 +1,1 @@
-import{ClickElement}from"../elements/click.js";import{customElements}from"../api/dom.js";import{createElement}from"react";customElements.define("a-click",ClickElement);var ClickComponent=(props)=>createElement("a-click",props);export{ClickComponent}
+import{ClickElement}from"../elements/click.js";import{customElements}from"../api/custom-elements.js";import{createElement}from"react";customElements.define("a-click",ClickElement);var ClickComponent=(props)=>createElement("a-click",props);export{ClickComponent}

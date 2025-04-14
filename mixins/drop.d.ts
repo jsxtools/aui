@@ -1,4 +1,4 @@
-import type { CustomElementConstructor } from "../api/dom.ts";
+import type { CustomElementConstructor } from "../types.ts";
 import { InternalsMixin } from "./internals.ts";
 /** A mixin to provide drop support to a custom element. */
 export declare const DropMixin: <T extends CustomElementConstructor>(Element: T) => T & DropMixin.Constructor;

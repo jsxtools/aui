@@ -1,4 +1,4 @@
-import type { CustomElementConstructor } from "../api/dom.ts";
+import type { CustomElementConstructor } from "../types.ts";
 import { InternalsMixin } from "./internals.ts";
 /** A mixin to provide form association and validation support to a custom element. */
 export declare const FormAssociatedMixin: <T extends CustomElementConstructor>(Element: T) => T & FormAssociatedMixin.Constructor;

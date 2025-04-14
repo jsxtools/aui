@@ -1,1 +1,0 @@
-var customElements=globalThis.customElements||{define(){}},HTMLElement=globalThis.HTMLElement||class{};export{customElements,HTMLElement}

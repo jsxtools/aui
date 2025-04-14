@@ -1,0 +1,1 @@
+var customElements=globalThis.customElements||{define(){}};export{customElements}

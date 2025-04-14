@@ -1,0 +1,1 @@
+var HTMLElement=globalThis.HTMLElement||class{};export{HTMLElement}

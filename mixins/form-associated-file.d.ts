@@ -1,4 +1,4 @@
-import type { CustomElementConstructor } from "../api/dom.ts";
+import type { CustomElementConstructor } from "../types.ts";
 import { FileMixin } from "./file.ts";
 import { FormAssociatedMixin } from "./form-associated.ts";
 /** A mixin to provide form association and validation to a custom element. */

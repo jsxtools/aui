@@ -1,1 +1,1 @@
-import{fetch}from"./api/fetch.js";import{showOpenFilePicker}from"./api/show-open-file-picker.js";import{HTMLElement,customElements}from"./api/dom.js";export{showOpenFilePicker,fetch,customElements,HTMLElement}
+import{fetch}from"./api/fetch.js";import{customElements}from"./api/custom-elements.js";import{HTMLElement}from"./api/html-element.js";import{showOpenFilePicker}from"./api/show-open-file-picker.js";export{showOpenFilePicker,fetch,customElements,HTMLElement}

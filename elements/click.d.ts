@@ -1,6 +1,6 @@
 import { ClickMixin } from "../mixins/click.ts";
-declare const ClickElement_base: import("../api/dom.ts").CustomElementConstructor<import("../api/dom.ts").CustomElement> & ClickMixin.Constructor;
-/** A Custom Element with keyboard-accessible click support. */
+declare const ClickElement_base: import("../types.ts").CustomElementConstructor<import("../types.ts").CustomElement> & ClickMixin.Constructor;
+/** A custom element with keyboard-accessible click support. */
 export declare class ClickElement extends ClickElement_base {
 }
 export declare namespace ClickElement {

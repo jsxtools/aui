@@ -1,1 +1,1 @@
-import{ShadowMixin}from"../mixins/shadow.js";import{HTMLElement}from"../api/dom.js";class ShadowElement extends ShadowMixin(HTMLElement){}export{ShadowElement}
+import{ShadowMixin}from"../mixins/shadow.js";import{HTMLElement}from"../api/html-element.js";class ShadowElement extends ShadowMixin(HTMLElement){}export{ShadowElement}

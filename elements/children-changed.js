@@ -1,1 +1,1 @@
-import{ChildrenChangedMixin}from"../mixins/children-changed.js";import{HTMLElement}from"../api/dom.js";class ChildrenChangedElement extends ChildrenChangedMixin(HTMLElement){}export{ChildrenChangedElement}
+import{ChildrenChangedMixin}from"../mixins/children-changed.js";import{HTMLElement}from"../api/html-element.js";class ChildrenChangedElement extends ChildrenChangedMixin(HTMLElement){}export{ChildrenChangedElement}

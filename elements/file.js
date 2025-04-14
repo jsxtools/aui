@@ -1,1 +1,1 @@
-import{FileMixin,TransferFile}from"../mixins/file.js";import{HTMLElement}from"../api/dom.js";class FileElement extends FileMixin(HTMLElement){}export{TransferFile,FileElement}
+import{FileMixin,TransferFile}from"../mixins/file.js";import{HTMLElement}from"../api/html-element.js";class FileElement extends FileMixin(HTMLElement){}export{TransferFile,FileElement}

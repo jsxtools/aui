@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Time · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time" aria-current="page">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Time</h1>
+			<p>An easily stylable form element to enter and edit time.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { FormAssociatedTimeElement } from "./form-associated-time-element.js"
+
+					customElements.define("a-time", FormAssociatedTimeElement)
+				</script>
+				<style>
+					a-time {
+						display: block;
+						width: fit-content;
+
+						&:not(:defined) {
+							min-height: 1.5rem;
+						}
+					}
+				</style>
+				<div class="preview">
+					<form style="display:grid;gap:2rem">
+						<p>
+							<a-time name="time" value="15:15"></a-time>
+						</p>
+						<p>
+							<button type="reset" data-color="red">Reset</button>
+							<button type="submit">Submit</button>
+						</p>
+					</form>
+				</div>
+				<pre class="code"><code>&lt;form&gt;
+	&lt;p&gt;
+		&lt;a-time name="time" value="15:15"&gt;&lt;/a-time&gt;
+	&lt;/p&gt;
+	&lt;p&gt;
+		&lt;button type="reset"&gt;Reset&lt;/button&gt;
+		&lt;button type="submit"&gt;Test&lt;/button&gt;
+	&lt;/p&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+import { FormAssociatedTimeElement } from "@jsxtools/aui/elements/form-associated-time"
+
+customElements.define("a-time", FormAssociatedTimeElement)
+&lt;/script&gt;</code></pre>
+			</div>
+		</main>
+	</body>
+</html>

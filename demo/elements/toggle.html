@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Toggle · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle" aria-current="page">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Toggle</h1>
+			<p>A two-state button that can be on or off.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { ToggleElement } from "./toggle-element.js"
+
+					customElements.define("a-toggle", ToggleElement)
+				</script>
+				<style>
+					a-toggle {
+						display: flex;
+
+						/* Layout */
+						align-items: center;
+						height: 2rem;
+						justify-content: center;
+						width: 2rem;
+
+						/* Appearance */
+						border-radius: 0.25rem;
+						box-shadow: var(--color-gray-200) 0 0 0 1px inset;
+						color: var(--color-gray-600);
+						stroke: currentColor;
+
+						/* Behavior */
+						user-select: none;
+
+						&:hover,
+						&:focus-visible {
+							background-color: var(--color-gray-100);
+						}
+
+						&:state(pressed) {
+							fill: var(--color-gray-900);
+						}
+
+						& svg {
+							block-size: 1rem;
+							inline-size: 1rem;
+						}
+					}
+				</style>
+				<div class="preview">
+					<div style="display: flex; gap: 20px; place-content: center;">
+						<a-toggle aria-label="Favorite">
+							<svg>
+								<use href="#:icon:heart" />
+							</svg>
+						</a-toggle>
+					</div>
+				</div>
+				<pre class="code"><code>&lt;a-toggle aria-label="Favorite"&gt;
+	&lt;svg&gt;&lt;use href="#:icon:heart" /&gt;&lt;/svg&gt;
+&lt;/a-toggle&gt;
+
+&lt;script&gt;
+import { ToggleElement } from "@jsxtools/aui/elements/toggle"
+
+customElements.define("a-toggle", ToggleElement)
+&lt;/script&gt;</code></pre>
+				<svg hidden style="display:none">
+					<symbol id=":icon:heart" viewBox="0 0 16 16" stroke="currentcolor" strokeLinecap="round">
+						<path
+							d="M7.99961 13.8667C7.88761 13.8667 7.77561 13.8315 7.68121 13.7611C7.43321 13.5766 1.59961 9.1963 1.59961 5.8667C1.59961 3.80856 3.27481 2.13336 5.33294 2.13336C6.59054 2.13336 7.49934 2.81176 7.99961 3.3131C8.49988 2.81176 9.40868 2.13336 10.6663 2.13336C12.7244 2.13336 14.3996 3.80803 14.3996 5.8667C14.3996 9.1963 8.56601 13.5766 8.31801 13.7616C8.22361 13.8315 8.11161 13.8667 7.99961 13.8667Z"
+							fill-rule="evenodd" />
+					</symbol>
+				</svg>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,6 +1,8 @@
 import { userEvent } from "@vitest/browser/context"
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
-import { ClickElement } from "../../src/elements/click.js"
+
+import { ClickElement } from "../../src/elements/click-element.ts"
+import { ClickMixin } from "../../src/mixins/click-mixin.ts"
 
 let element: ClickElement
 
@@ -83,8 +85,9 @@ test('ClickElement ignores "a" key on keydown', async () => {
 	expect(clickHandler).toHaveBeenCalledTimes(0)
 })
 
-test("ClickElement test extending element", async () => {
+test("ClickElement can be extended", () => {
 	const connectedCallbackHandler = vi.fn()
+	const disconnectedCallbackHandler = vi.fn()
 
 	class CustomClickElement extends ClickElement {
 		connectedCallback(): void {
@@ -92,14 +95,66 @@ test("ClickElement test extending element", async () => {
 
 			connectedCallbackHandler()
 		}
+
+		disconnectedCallback(): void {
+			super.disconnectedCallback?.()
+
+			disconnectedCallbackHandler()
+		}
 	}
 
-	customElements.define("test-click-custom", CustomClickElement)
+	const elementName = `test-click-element`
 
-	const element = new CustomClickElement()
+	customElements.define(elementName, CustomClickElement)
 
-	document.body.appendChild(element)
-	document.body.removeChild(element)
+	const customElement = new CustomClickElement()
+
+	expect(connectedCallbackHandler).toHaveBeenCalledTimes(0)
+	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
+
+	document.body.appendChild(customElement)
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
+	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
+
+	document.body.removeChild(customElement)
+
+	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
+	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(1)
+})
+
+test("ClickMixin can be extended", () => {
+	const connectedCallbackHandler = vi.fn()
+	const disconnectedCallbackHandler = vi.fn()
+
+	// Create a superclass that overrides attributeChangedCallback
+	class SuperClickElement extends HTMLElement {
+		connectedCallback(): void {
+			connectedCallbackHandler()
+		}
+
+		disconnectedCallback(): void {
+			disconnectedCallbackHandler()
+		}
+	}
+
+	// Create a subclass that overrides attributeChangedCallback
+	class CustomClickElement extends ClickMixin(SuperClickElement) {}
+
+	customElements.define("test-super-custom-click-element", CustomClickElement)
+
+	const customElement = new CustomClickElement()
+
+	expect(connectedCallbackHandler).toHaveBeenCalledTimes(0)
+	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
+
+	document.body.appendChild(customElement)
+
+	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
+	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
+
+	document.body.removeChild(customElement)
+
+	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
+	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(1)
 })

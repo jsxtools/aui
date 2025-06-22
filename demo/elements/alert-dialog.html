@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Alert Dialog · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog" aria-current="page">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Alert Dialog</h1>
+			<p>A dialog that requires user response to proceed.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { AlertDialogElement } from "./alert-dialog-element.js"
+
+					customElements.define("a-alert-dialog", AlertDialogElement)
+				</script>
+				<style>
+					a-alert-dialog {
+						width: 24rem;
+						max-width: calc(100vw - 3rem);
+						padding: 1.5rem;
+						border-radius: .5rem;
+						outline: 1px solid var(--color-gray-300);
+						background-color: var(--color-gray-50);
+						color: var(--color-gray-900);
+
+						&::backdrop {
+							background-color: color-mix(in srgb, var(--color-gray-50) 50%, transparent);
+						}
+
+						&::part(label) {
+							font-size: 1.125rem;
+							line-height: 1.75rem;
+							letter-spacing: -.0025em;
+							font-weight: 500;
+						}
+
+						&::part(description) {
+							font-size: 1rem;
+							line-height: 1.5rem;
+							color: var(--color-gray-600);
+						}
+
+						& h2 {
+							margin-block: 0;
+							font-size: 100%;
+						}
+
+						& p {
+							margin-block: 0.125rem 0;
+							font-size: 100%;
+						}
+					}
+
+					a-alert-dialog:popover-open {
+						pointer-events: auto;
+
+						:has(&) {
+							pointer-events: none;
+						}
+					}
+
+					button-group {
+						display: flex;
+						gap: 1rem;
+						justify-content: end;
+						margin-block-start: 1.5rem;
+					}
+				</style>
+				<div class="preview">
+					<button type="button" command="toggle-popover" commandfor="example" data-color="red">Discard Draft</button>
+
+					<a-alert-dialog id="example" popover="manual">
+						<h2 slot="label">Discard draft?</h2>
+						<p slot="description">You can't undo this action.</p>
+						<button-group>
+							<button type="button" popovertarget="example" popovertargetaction="toggle">Cancel</button>
+							<button type="button" popovertarget="example" popovertargetaction="toggle" data-color="red">Discard</button>
+						</button-group>
+					</a-alert-dialog>
+				</div>
+				<pre class="code"><code>&lt;button type="button" command="toggle-popover" commandfor="example" data-color="red"&gt;Discard Draft&lt;/button&gt;
+
+&lt;a-alert-dialog id="example" popover="manual"&gt;
+	&lt;h2 slot="label"&gt;Discard draft?&lt;/h2&gt;
+	&lt;p slot="description"&gt;You can't undo this action.&lt;/p&gt;
+	&lt;button-group&gt;
+		&lt;button type="button" popovertarget="example" popovertargetaction="toggle"&gt;Cancel&lt;/button&gt;
+		&lt;button type="button" popovertarget="example" popovertargetaction="toggle" data-color="red"&gt;Discard&lt;/button&gt;
+	&lt;/button-group&gt;
+&lt;/a-alert-dialog&gt;
+
+&lt;script&gt;
+import { AlertDialogElement } from "@jsxtools/aui/elements/alert-dialog"
+
+customElements.define("a-alert-dialog", AlertDialogElement)
+&lt;/script&gt;</code></pre>
+			</div>
+
+			<section class="page-section">
+				<h2>CSS Parts</h2>
+				<p>
+					CSS parts allow for fine-grained styling and theming. They target specific elements inside the component. An element may have multiple parts, and a part may be
+					used on multiple
+					elements.
+				</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><code>label</code></td>
+							<td>The label within the alert dialog</td>
+						</tr>
+						<tr>
+							<td><code>description</code></td>
+							<td>The description within the alert dialog</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+		</main>
+	</body>
+</html>

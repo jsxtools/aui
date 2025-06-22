@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Toast · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast" aria-current="page">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Toast</h1>
+			<p>Generates toast notifications.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { ToastListElement } from "./toast-list-element.js"
+
+					customElements.define("a-toast-list", ToastListElement)
+
+					let toastsCreated = 0
+
+					document.querySelector("button").addEventListener("click", () => {
+						button.dataset.title = `Toast ${++toastsCreated} created`
+					})
+				</script>
+				<style>
+					a-toast-list {
+						/* Layout */
+						border: none;
+						inset: auto 1rem 1rem auto;
+						overflow: visible;
+						width: 250px;
+
+						/* Appearance */
+						background-color: transparent;
+
+						/* Animation */
+						transition: display, translate 1s cubic-bezier(0.22, 1, 0.36, 1);
+						transition-behavior: allow-discrete;
+
+						&:hover {
+							/* Layout */
+							height: 100%;
+
+							&::part(toast) {
+								/* Transform */
+								scale: 1;
+								translate: 0 calc(0px - (var(--toast-count) - var(--toast-index)) * 100% - (var(--toast-count) - var(--toast-index)) * 0.75rem);
+							}
+						}
+
+						&:state(closing) {
+							translate: 0 9rem;
+						}
+
+						&::part(toast) {
+							/* Layout */
+							inset: auto 0 0;
+							position: absolute;
+							z-index: calc(0 + var(--toast-index));
+
+							/* Appearance */
+							cursor: default;
+
+							/* Transform */
+							scale: max(0, 1 + (var(--toast-index) - var(--toast-count)) * .1);
+							translate: 0 calc(0px - (var(--toast-count) - var(--toast-index)) * 25%);
+							transform-origin: bottom;
+
+							/* Behavior */
+							user-select: none;
+						}
+
+						&::part(toast) {
+							display: grid;
+
+							/* Layout */
+							align-items: start;
+							grid-template-columns: 1fr 1.25rem;
+							grid-template-rows: auto auto;
+							padding: 1rem;
+
+							/* Appearance */
+							background: var(--color-gray-50);
+							color: var(--color-gray-900);
+							border-radius: .5rem;
+							box-shadow: var(--color-gray-200) 0 0 0 1px, rgba(0, 0, 0, 0.1) 0 2px 10px;
+
+							/* Animation */
+							transition: display, opacity 0.5s, scale 0.5s cubic-bezier(0.22, 1, 0.36, 1), translate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+							transition-behavior: allow-discrete;
+						}
+
+						&::part(close) {
+							display: flex;
+							/* Grid Layout */
+							grid-area: 1 / 2 / span 2 / 3;
+							/* Layout */
+							padding: 0.125rem;
+							/* Appearance */
+							background: none;
+							border: none;
+							border-radius: 0.25rem;
+							color: inherit;
+						}
+
+						&::part(close):hover {
+							background-color: var(--color-gray-100);
+						}
+
+						&::part(title) {
+							/* Layout */
+							margin-block: 0;
+
+							/* Text */
+							font-weight: 500;
+							font-size: 0.975rem;
+							line-height: 1.25rem;
+						}
+
+						&::part(description) {
+							/* Layout */
+							margin-block: 0;
+
+							/* Text */
+							font-size: 0.925rem;
+							line-height: 1.25rem;
+						}
+					}
+
+					@starting-style {
+						a-toast-list::part(toast) {
+							translate: 0 100%;
+						}
+					}
+				</style>
+				<div class="preview">
+					<button commandfor="toasty" command="--add" id="button" data-title="Toast created" data-description="This is a toast notification">
+						Create toast
+					</button>
+
+					<a-toast-list id="toasty" popover="manual">
+						<template part="toast">
+							<h2 part="title" slot="title"></h2>
+							<p part="description" slot="description"></p>
+							<button part="close">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M18 6 6 18" />
+									<path d="m6 6 12 12" />
+								</svg>
+							</button>
+						</template>
+					</a-toast-list>
+				</div>
+				<pre class="code"><code>&lt;button
+	commandfor="toasty"
+	command="--add"
+	data-title="Toast 1 created"
+	data-description="This is a toast notification"
+&gt;Create toast&lt;/button&gt;
+
+&lt;a-toast-list id="toasty" popover="manual"&gt;
+	&lt;template part="toast"&gt;
+		&lt;h2 part="title" slot="title"&gt;&lt;/h2&gt;
+		&lt;p part="description" slot="description"&gt;&lt;/p&gt;
+		&lt;button part="close"&gt;✕&lt;/button&gt;
+	&lt;/template&gt;
+&lt;/a-toast-list&gt;
+
+&lt;script&gt;
+import { ToastListElement } from "@jsxtools/aui/elements/toast-list"
+
+customElements.define("a-toast-list", ToastListElement)
+&lt;/script&gt;</code></pre>
+			</div>
+		</main>
+	</body>
+</html>

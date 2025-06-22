@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Choice · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice" aria-current="page">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Choice</h1>
+			<p>Provides shared state to a series of checkboxes or radios.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { FormAssociatedChoiceElement } from "./form-associated-choice-element.js"
+					import { OptionElement } from "./option-element.js"
+
+					customElements.define("a-choice", FormAssociatedChoiceElement)
+					customElements.define("a-option", OptionElement)
+				</script>
+				<style>
+					a-choice {
+						display: grid;
+						gap: 0.25em;
+					}
+
+					a-option {
+						display: flex;
+
+						/* Layout */
+						align-items: center;
+						gap: 0.5rem;
+						padding: 0.25em 0.5em;
+
+						/* Appearance */
+						border-radius: 0.25em;
+						cursor: pointer;
+
+						&:state(selected) {
+							background-color: color-mix(in srgb, CanvasText 10%, transparent);
+						}
+					}
+				</style>
+				<div class="preview">
+					<form style="display:grid;gap:2rem">
+						<p>
+							<label for="pow">Turtle Power</label>
+							<a-choice name="turtle-power" id="pow" required>
+								<a-option>Leonardo</a-option>
+								<a-option>Donatello</a-option>
+								<a-option>Michelangelo</a-option>
+								<a-option>Raphael</a-option>
+							</a-choice>
+						</p>
+						<p>
+							<button type="reset" data-color="red">Reset</button>
+							<button type="submit">Submit</button>
+						</p>
+					</form>
+				</div>
+				<pre class="code"><code>&lt;form&gt;
+	&lt;p&gt;
+		&lt;label for="pow"&gt;Turtle Power&lt;/label&gt;
+		&lt;a-choice name="turtle-power" id="pow" required&gt;
+			&lt;a-option&gt;Leonardo&lt;/a-option&gt;
+			&lt;a-option&gt;Donatello&lt;/a-option&gt;
+			&lt;a-option&gt;Michelangelo&lt;/a-option&gt;
+			&lt;a-option&gt;Raphael&lt;/a-option&gt;
+		&lt;/a-choice&gt;
+	&lt;/p&gt;
+	&lt;p&gt;
+		&lt;button type="reset"&gt;Reset&lt;/button&gt;
+		&lt;button type="submit"&gt;Submit&lt;/button&gt;
+	&lt;/p&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+import { FormAssociatedChoiceElement } from "@jsxtools/aui/elements/choice"
+import { OptionElement } from "@jsxtools/aui/elements/option"
+
+customElements.define("a-choice", FormAssociatedChoiceElement)
+customElements.define("a-choice", FormAssociatedChoiceElement)
+&lt;/script&gt;</code></pre>
+			</div>
+		</main>
+	</body>
+</html>

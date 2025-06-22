@@ -1,0 +1,100 @@
+@layer base {
+	:root {
+		/* Text */
+		-webkit-font-smoothing: antialiased;
+		tab-size: 4;
+		text-rendering: optimizeLegibility;
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+
+		/* Behavior */
+		interpolate-size: allow-keywords;
+		-webkit-tap-highlight-color: transparent;
+
+		--Accent: color(srgb 0.94 0.93 0.93 / 0.9);
+		--AccentText: color(srgb 0.1 0.4 0.7);
+		--Canvas: color(srgb 1 1 1);
+		--CanvasText: color(srgb 0.21 0.22 0.25);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--Accent: color(srgb 0.94 0.93 0.93 / 0.9);
+			--AccentText: color(srgb 0.4 0.65 0.95);
+			--Canvas: color(srgb 0.08 0.08 0.1);
+			--CanvasText: color(srgb 0.78 0.79 0.8);
+		}
+	}
+
+	a[href]:not([class]) {
+		/* Text */
+		text-underline-offset: 0.125em;
+		/* Appearance */
+		color: var(--AccentText);
+	}
+
+	:where(h1, h2, h3, h4, h5, h6):has(+ pre) {
+		/* Layout */
+		margin-block: 3rem 0;
+		/* Text */
+		font-size: 1rem;
+	}
+
+	hr {
+		/* Layout */
+		border: none;
+		height: 3rem;
+		width: -webkit-fill-available;
+		width: -moz-available;
+		width: stretch;
+
+		/* Appearance */
+		background-image: linear-gradient(
+			0deg,
+			#0000 calc(50% - 1px),
+			var(--CanvasText) calc(50% - 1px),
+			var(--CanvasText) 50%,
+			#0000 50%
+		);
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 0;
+	}
+
+	p {
+		margin-block: 0;
+	}
+
+	button {
+		/* Layout */
+		border: none;
+		padding-inline: 0.5rem;
+		padding-block: 0.375rem;
+
+		/* Text */
+		font-size: 0.75rem;
+		font-weight: 500;
+
+		/* Appearance */
+		background-color: var(--Button);
+		border-radius: 0.25rem;
+		box-shadow: var(--ButtonEdge) 0 0 0 1px inset;
+		color: var(--ButtonText);
+		cursor: pointer;
+
+		--Button: #eeeeee;
+		--ButtonText: #111111;
+		--ButtonEdge: #cccccc;
+
+		&:hover {
+			--Button: #ffffff;
+		}
+
+		&:has(> svg:only-child) {
+			padding-inline: 0.5rem;
+		}
+	}
+}

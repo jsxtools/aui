@@ -1,6 +1,7 @@
 import { expect, test } from "vitest"
-import { InternalsElement } from "../../src/elements/internals.ts"
-import { InternalsMixin } from "../../src/mixins/internals.ts"
+
+import { InternalsElement } from "../../src/elements/internals-element.ts"
+import { InternalsMixin } from "../../src/mixins/internals-mixin.ts"
 
 // Register the custom element
 customElements.define("test-internals", InternalsElement)

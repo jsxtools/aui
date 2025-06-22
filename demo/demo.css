@@ -1,0 +1,43 @@
+@import "./colors.css";
+@import "./layout.css";
+
+body {
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	/* Layout */
+	margin-block: unset;
+
+	/* Text */
+	font-size: unset;
+	font-weight: unset;
+}
+
+button {
+	display: flex;
+
+	/* Layout */
+	align-items: center;
+	border: none;
+	justify-content: center;
+	height: 2.5rem;
+	padding: 0 .875rem;
+
+	/* Text */
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.5rem;
+
+	/* Appearance */
+	box-shadow: var(--color-gray-200) 0 0 0 1px inset;
+	border-radius: .375rem;
+	background-color: var(--color-gray-50);
+	color: var(--color-gray-900);
+
+	&[data-color="red"] {
+		/* Appearance */
+		color: var(--color-red);
+	}
+}

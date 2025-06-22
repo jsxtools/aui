@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
-import { DropElement } from "../../src/elements/drop.js"
-import { DropMixin } from "../../src/mixins/drop.js"
+
+import { DropElement } from "../../src/elements/drop-element.ts"
+import { DropMixin } from "../../src/mixins/drop-mixin.ts"
 
 let element: DropElement
 
@@ -92,25 +93,28 @@ test('DropElement removes "active-drop" state on drop', () => {
 })
 
 test('DropElement dispatches "dropenter" / "dropleave" events', () => {
+	// test dropenter
 	const dragEnterEvent = new DragEvent("dragenter", { bubbles: true, cancelable: true })
 	const dragEnterPreventDefault = vi.spyOn(dragEnterEvent, "preventDefault")
-	const dragLeaveEvent = new DragEvent("dragleave", { bubbles: true, cancelable: true })
-	const dragLeavePreventDefault = vi.spyOn(dragEnterEvent, "preventDefault")
-
 	const dropEnterListener = vi.fn((event: DragEvent) => {
-		event.preventDefault()
-	})
-	const dropLeaveListener = vi.fn((event: DragEvent) => {
 		event.preventDefault()
 	})
 
 	element.addEventListener("dropenter", dropEnterListener)
-	element.addEventListener("dropleave", dropLeaveListener)
 
 	element.dispatchEvent(dragEnterEvent)
 
 	expect(dropEnterListener).toHaveBeenCalled()
 	expect(dragEnterPreventDefault).toHaveBeenCalled()
+
+	// test dropleave
+	const dragLeaveEvent = new DragEvent("dragleave", { bubbles: true, cancelable: true })
+	const dragLeavePreventDefault = vi.spyOn(dragLeaveEvent, "preventDefault")
+	const dropLeaveListener = vi.fn((event: DragEvent) => {
+		event.preventDefault()
+	})
+
+	element.addEventListener("dropleave", dropLeaveListener)
 
 	element.dispatchEvent(dragLeaveEvent)
 

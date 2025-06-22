@@ -4,7 +4,8 @@ import * as React from "react"
 
 import { expect, test, vi } from "vitest"
 import { render } from "vitest-browser-react"
-import { ClickComponent } from "../../src/react/click.js"
+
+import { ClickComponent } from "../../src/react/click-component.ts"
 
 test("renders ClickComponent with children", async () => {
 	const testContent = "Test Content"

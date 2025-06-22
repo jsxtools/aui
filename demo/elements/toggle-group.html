@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Toggle Group · AUI</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="AUI" />
+		<meta name="description" content="A baseline UI as Mixins, Custom Elements, React Components, etc." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="../base.css" />
+		<link rel="stylesheet" href="../index.css" />
+		<link rel="shortcut icon" href="../favicon.ico" />
+		<script src="../base.js"></script>
+		<script type="module" src="../syntax-highlighting.js"></script>
+	</head>
+
+	<body class="page-grid">
+		<header class="x-head">
+			<h1>
+				<a href="../">AUI</a>
+			</h1>
+		</header>
+
+		<div class="x-side">
+			<nav class="page-navigation" aria-label="Main navigation">
+				<section>
+					<h3>Components</h3>
+					<ul>
+						<li><a href="./accordion">Accordion</a></li>
+						<li><a href="./alert-dialog">Alert Dialog</a></li>
+						<li><a href="./avatar">Avatar</a></li>
+						<li><a href="./calendar">Calendar</a></li>
+						<li><a href="./checkbox">Checkbox</a></li>
+						<li><a href="./choice">Choice</a></li>
+						<li><a href="./time">Time</a></li>
+						<li><a href="./toast">Toast</a></li>
+						<li><a href="./toggle">Toggle</a></li>
+						<li><a href="./toggle-group" aria-current="page">Toggle Group</a></li>
+					</ul>
+				</section>
+			</nav>
+		</div>
+
+		<main class="x-main">
+			<h1 class="page-title">Toggle Group</h1>
+			<p>Provides a shared state to a series of toggle buttons.</p>
+
+			<div class="playground">
+				<script type="module">
+					import { ToggleGroupElement } from "@jsxtools/aui/elements/toggle-group"
+					import { ToggleElement } from "@jsxtools/aui/elements/toggle"
+
+					customElements.define("a-toggle-group", ToggleGroupElement)
+					customElements.define("a-toggle", ToggleElement)
+				</script>
+				<style>
+					a-toggle-group {
+						display: inline-flex;
+
+						/* Layout */
+						align-items: center;
+						justify-content: center;
+					}
+
+					a-toggle {
+						display: inline-flex;
+
+						/* Layout */
+						align-items: center;
+						height: 2rem;
+						justify-content: center;
+						width: 2rem;
+
+						/* Appearance */
+						border-radius: 0.25rem;
+						box-shadow: var(--color-gray-200) 0 0 0 1px inset;
+						color: var(--color-gray-600);
+						stroke: currentColor;
+
+						/* Behavior */
+						user-select: none;
+
+						&:focus-visible {
+							background-color: transparent;
+							outline: 2px solid var(--color-blue);
+							outline-offset: -1px;
+						}
+
+						&:hover {
+							background-color: var(--color-gray-100);
+						}
+
+						&:state(pressed) {
+							background-color: var(--color-gray-100);
+							color: var(--color-gray-900);
+						}
+
+						& svg {
+							block-size: 1rem;
+							inline-size: 1rem;
+						}
+					}
+				</style>
+				<div class="preview">
+					<div style="display: flex; gap: 20px; place-content: center;">
+						<a-toggle-group>
+							<a-toggle>
+								<svg>
+									<use href="#:icon:text-align-left" />
+								</svg>
+							</a-toggle>
+							<a-toggle>
+								<svg>
+									<use href="#:icon:text-align-center" />
+								</svg>
+							</a-toggle>
+							<a-toggle>
+								<svg>
+									<use href="#:icon:text-align-right" />
+								</svg>
+							</a-toggle>
+						</a-toggle-group>
+					</div>
+				</div>
+				<pre class="code"><code>&lt;a-toggle-group&gt;
+	&lt;a-toggle&gt;
+		&lt;svg&gt;&lt;use href="#:icon:text-align-left" /&gt;&lt;/svg&gt;
+	&lt;/a-toggle&gt;
+	&lt;a-toggle&gt;
+		&lt;svg&gt;&lt;use href="#:icon:text-align-center" /&gt;&lt;/svg&gt;
+	&lt;/a-toggle&gt;
+	&lt;a-toggle&gt;
+		&lt;svg&gt;&lt;use href="#:icon:text-align-right" /&gt;&lt;/svg&gt;
+	&lt;/a-toggle&gt;
+&lt;/a-toggle-group&gt;
+
+&lt;script&gt;
+import { ToggleGroupElement } from "@jsxtools/aui/elements/toggle-group"
+import { ToggleElement } from "@jsxtools/aui/elements/toggle"
+
+customElements.define("a-toggle-group", ToggleGroupElement)
+customElements.define("a-toggle", ToggleElement)
+&lt;/script&gt;</code></pre>
+				<svg hidden style="display:none">
+					<symbol id=":icon:text-align-left" viewBox="0 0 16 16" stroke="currentcolor" strokeLinecap="round">
+						<path d="M2.5 3.5H13.5" />
+						<path d="M2.5 9.5H13.5" />
+						<path d="M2.5 6.5H10.5" />
+						<path d="M2.5 12.5H10.5" />
+					</symbol>
+					<symbol id=":icon:text-align-center" viewBox="0 0 16 16" stroke="currentcolor" strokeLinecap="round">
+						<path d="M3 3.5H14" />
+						<path d="M3 9.5H14" />
+						<path d="M4.5 6.5H12.5" />
+						<path d="M4.5 12.5H12.5" />
+					</symbol>
+					<symbol id=":icon:text-align-right" viewBox="0 0 16 16" stroke="currentcolor" strokeLinecap="round">
+						<path d="M2.5 3.5H13.5" />
+						<path d="M2.5 9.5H13.5" />
+						<path d="M5.5 6.5H13.5" />
+						<path d="M5.5 12.5H13.5" />
+					</symbol>
+				</svg>
+			</div>
+		</main>
+	</body>
+</html>

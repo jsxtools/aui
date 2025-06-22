@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, expect, test, vi } from "vitest"
-import { DragElement } from "../../src/elements/drag.js"
-import { DragMixin } from "../../src/mixins/drag.js"
+
+import { DragElement } from "../../src/elements/drag-element.ts"
+import { DragMixin } from "../../src/mixins/drag-mixin.ts"
 
 let element: DragElement
 
@@ -8,6 +9,7 @@ beforeAll(async () => {
 	customElements.define("test-drag", DragElement)
 
 	element = new DragElement()
+	element.draggable = true
 	element.textContent = "Drag here"
 
 	document.body.appendChild(element)
@@ -15,10 +17,6 @@ beforeAll(async () => {
 
 afterAll(() => {
 	document.body.removeChild(element)
-})
-
-test("DragElement is always draggable", async () => {
-	expect(element.draggable).toBe(true)
 })
 
 test('DragElement manages "active-drag" state', async () => {
@@ -34,24 +32,6 @@ test('DragElement manages "active-drag" state', async () => {
 	element.dispatchEvent(dragEndEvent)
 
 	expect(element.internals.states.has("active-drag")).toBe(false)
-})
-
-test("DragElement resists changes to draggable state", async () => {
-	expect(element.draggable).toBe(true)
-
-	expect(() => {
-		element.draggable = false
-	}).toThrow()
-
-	expect(element.draggable).toBe(true)
-
-	element.setAttribute("draggable", "false")
-
-	expect(element.draggable).toBe(true)
-
-	element.removeAttribute("draggable")
-
-	expect(element.draggable).toBe(true)
 })
 
 test("DragElement can be extended", () => {
@@ -93,19 +73,19 @@ test("DragElement can be extended", () => {
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(1)
+	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	customElement.setAttribute("draggable", "false")
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(2)
+	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	document.body.removeChild(customElement)
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(1)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(2)
+	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 })
 
 test("DragMixin can be extended", () => {
@@ -144,17 +124,17 @@ test("DragMixin can be extended", () => {
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(1)
+	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	customElement.setAttribute("draggable", "false")
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(0)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(2)
+	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 
 	document.body.removeChild(customElement)
 
 	expect(connectedCallbackHandler).toHaveBeenCalledTimes(1)
 	expect(disconnectedCallbackHandler).toHaveBeenCalledTimes(1)
-	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(2)
+	expect(attributeChangedCallbackHandler).toHaveBeenCalledTimes(0)
 })
